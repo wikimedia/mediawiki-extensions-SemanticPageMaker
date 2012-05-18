@@ -152,7 +152,7 @@ function wgSPMSetupExtension() {
 
 	// Register Credits
 	$wgExtensionCredits['parserhook'][] = array(
-	'name' => 'Wiki&#160;Editors&#160;Extension', 'version' => SPM_VERSION,
+	'name' => 'Semantic Page Maker Extension (formerly pulished as Wiki&#160;Editors&#160;Extension)', 'version' => SPM_VERSION,
 			'author' => "Ning Hu, Justin Zhang, [http://smwforum.ontoprise.com/smwforum/index.php/Jesse_Wang Jesse Wang], sponsored by [http://projecthalo.com Project Halo], [http://www.vulcan.com Vulcan Inc.]",
 			'url' => 'http://wiking.vulcan.com/dev',
 			'description' => 'Easy Wiki page editor for wiki user.' );
