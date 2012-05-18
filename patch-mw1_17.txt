@@ -1,0 +1,33 @@
+Index: includes/parser/Parser.php
+===================================================================
+--- includes/parser/Parser.php	(revision 0)
++++ includes/parser/Parser.php	(revision 0)
+@@ -3139,9 +3139,14 @@
+ 			# Do infinite loop check
+ 			# This has to be done after redirect resolution to avoid infinite loops via redirects
+ 			if ( !$frame->loopCheck( $title ) ) {
+-				$found = true;
+-				$text = '<span class="error">' . wfMsgForContent( 'parser-template-loop-warning', $titleText ) . '</span>';
+-				wfDebug( __METHOD__.": template loop broken at '$titleText'\n" );
++				if ( !wfRunHooks( 'ParserOnTemplateLoopCheck', array( &$this, $title, &$checked ) ) ) {
++					$checked = false;
++				}
++				if(!$checked) {
++					$found = true;
++					$text = '<span class="error">' . wfMsgForContent( 'parser-template-loop-warning', $titleText ) . '</span>';
++					wfDebug( __METHOD__.": template loop broken at '$titleText'\n" );
++				}
+ 			}
+ 			wfProfileOut( __METHOD__ . '-loadtpl' );
+ 		}
+@@ -3246,6 +3251,10 @@
+ 			$this->mTplDomCache[$titleText] = false;
+ 			return array( false, $title );
+ 		}
++		if ( !wfRunHooks( 'ParserBeforeTemplateParse', array( &$this, $title, &$text ) ) ) {
++			wfProfileOut( __METHOD__ );
++			return array( false, $title );
++		}
+ 
+ 		$dom = $this->preprocessToDom( $text, self::PTD_FOR_INCLUSION );
+ 		$this->mTplDomCache[ $titleText ] = $dom;

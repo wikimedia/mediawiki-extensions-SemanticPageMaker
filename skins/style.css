@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+body{
+				font-family:"Lucida Grande", "Lucida Sans Unicode", Verdana, Arial, Helvetica, sans-serif;
+				font-size:12px;
+}
+
+p, h1, form{border:0; margin:0; padding:0;}
+.spacer{clear:both; height:1px;}
+
+/* ----------- My Form ----------- */
+.myform{
+				margin:0 auto;
+}
+
+/* ----------- stylized ----------- */
+.stylized{
+				border:solid 1px #b7ddf2;
+				background:#ebf4fb;
+}
+.stylized h1 {
+				font-size:14px;
+				font-weight:bold;
+				margin-bottom:8px;
+}
+.stylized p{
+				font-size:11px;
+				color:#666666;
+/*				margin-bottom:20px;
+				border-bottom:solid 1px #b7ddf2;*/
+				padding-bottom:10px;
+}
+.stylized label{
+				font-size:10pt;
+				display:block;
+				font-weight:bold;
+				text-align:right;
+				width:170px;
+				float:left;
+}
+.stylized .small{
+				color:#666666;
+				display:block;
+				font-size:11px;
+				font-weight:normal;
+				text-align:right;
+				width:160px;
+}
+.stylized input{
+				float:left;
+				font-size:12px;
+				padding:4px 2px;
+				border:solid 1px #aacfe4;
+				width:200px;
+				margin:2px 0 20px 10px;
+}
+.stylized select{
+				float:left;
+				font-size:12px;
+				padding:4px 2px;
+				border:solid 1px #aacfe4;
+				width:200px;
+				margin:2px 0 20px 10px;
+}
+
+/* STANDARD */
+
+button:hover, .buttons a:hover {
+				background-color:#336699;
+				border:1px solid #c2e1ef;
+				color:#dff4ff;
+}
+
+.buttons button, .buttons a {
+				background-color:#dff4ff;
+				border:1px solid #00529B;
+				color:#336699;
+				padding:5px;
+}
+
+.buttons a:active {
+				background-color:#6299c5;
+				border:1px solid #6299c5;
+				color:#fff;
+}
+
+/* POSITIVE */
+
+button.positive, .buttons a.positive{
+				color:#529214;
+}
+.buttons a.positive:hover {
+				background-color:#529214;
+				border:1px solid #C6D880;
+				color:#E6EFC2;
+}
+.buttons button.positive, .buttons a.positive {
+				background-color:#E6EFC2;
+				border:1px solid #C6D880;
+				color:#529214;
+				padding:5px;
+}
+.buttons a.positive:active {
+				background-color:#669933;
+				border:1px solid #529214;
+				color:#E6EFC2;
+}
+
+/* NEGATIVE */
+
+.buttons a.negative, button.negative{
+				color:#d12f19;
+}
+.buttons a.negative:hover, button.negative:hover{
+				background:#fbe3e4;
+				border:1px solid #fbc2c4;
+				color:#d12f19;
+}
+.buttons a.negative:active{
+				background-color:#d12f19;
+				border:1px solid #d12f19;
+				color:#fff;
+}
+
+.info, .success, .warning, .error, .validation {
+				border: 1px solid;
+				margin: 10px 0px;
+				padding:15px 10px 15px 50px;
+				background-repeat: no-repeat;
+				background-position: 10px center;
+}
+.info {
+				color: #00529B;
+				background-color: #BDE5F8;
+				background-image: url('images/info.png');
+}
+.success {
+				color: #4F8A10;
+				background-color: #DFF2BF;
+				background-image:url('images/success.png');
+}
+.warning {
+				color: #9F6000;
+				background-color: #FEEFB3;
+				background-image: url('images/warning.png');
+}
+.error {
+				color: #D8000C;
+				background-color: #FFBABA;
+				background-image: url('images/error.png');
+}
+
+img.spm_ui_addin_icon {
+				width:15px;
+				float:right;
+}
+img.spm_remove_icon2 {
+				width:15px;
+				float:left;
+				margin-left:-40px;
+}

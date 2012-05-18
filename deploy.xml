@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploydescriptor>
+    <global>
+        <version>050</version>
+        <patchlevel>0</patchlevel>
+        <id>we</id>
+        <vendor>Vulcan</vendor>
+        <maintainer>Vulcan</maintainer>
+        <instdir>extensions/WikiEditors</instdir>
+        <description>WikiEditors.</description>
+        <helpurl>http://wiking.vulcan.com/helpdesk/extensions/WikiEditors/helps/help_WE_designer.html</helpurl>
+		<dependencies>
+						<dependency from="156" to="161">smw</dependency>
+			<dependency from="101" to="101">wom</dependency>
+			<dependency from="156" to="156" optional="true">smwhalo</dependency>
+			<dependency from="092" to="092" optional="true">widgets</dependency>
+        </dependencies>
+        <license>GPL-v2</license>
+    </global>
+    <codefiles>
+    
+    </codefiles>
+    <wikidumps>
+        <file loc="maintenance/templates.xml"/>
+    </wikidumps>
+    <resources>
+        <!-- empty -->
+    </resources>
+    <configs>
+        <new>
+            <require name="we"
+                file="extensions/WikiEditors/includes/WE_Initialize.php" />
+						<patch file="patch-mw1_16.txt"/>
+            <patch file="patch-smwhalo1_5_6.txt" />
+			<variable name="wgEditPageFrameOptions">
+				<string name="wgEditPageFrameOptions"
+					description="enable fancybox">SAMEORIGIN</string>
+			</variable>
+        </new>
+    </configs>
+</deploydescriptor>

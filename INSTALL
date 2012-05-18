@@ -1,0 +1,26 @@
+== Requirements ==
+
+* MediaWiki 1.13.5
+* PHP 5.x or greater installed and working
+* MySQL >= 4.0.14 (version required by MediaWiki)
+* WOM extension
+* SemanticMediaWiki extension >= 1.5
+* SMWHalo extension 1.5.6 / 1.6.x (optional)
+* Widgets extension (optional)
+
+== Installation ==
+
+Edit $IP/LocalSettings.php and add:
+
+    include_once('extensions/SemanticPageMaker/includes/SPM_Initialize.php');
+    $wgEditPageFrameOptions = SAMEORIGIN; /* enable fancybox */
+
+Apply patches with MW / SMW / SMWHalo
+
+Import SPM related templates / pages
+
+    php $IP/maintenance/importDump.php $IP/extensions/SemanticPageMaker/maintenace/templates.xml
+
+Upload image sample
+
+    $IP/extensions/SemanticPageMaker/maintenace/Sample.png

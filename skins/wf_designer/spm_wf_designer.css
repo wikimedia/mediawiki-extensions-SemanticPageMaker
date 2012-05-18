@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+.cl{clear:both;}
+.spline{clear:both; height:8px; overflow:hidden;}
+a,.submit{ cursor:pointer}
+
+.fb{ font-weight:bold}
+.fn{ font-weight:normal}
+
+.shadowtl{background:url(tl.png); width:15px; height:35px}
+.shadowtr{background:url(tr.png);width:15px; height:35px}
+.shadowbl{background:url(bl.png);height:18px;}
+.shadowbr{background:url(br.png);height:18px;}
+.shadowtbg{background:url(tbg.png);}
+.shadowbbg{background:url(bbg.png);}
+.shadowlbg{background:url(lbg.png)}
+.shadowrbg{background:url(rbg.png)}
+.shadowtbg h3{padding:5px 8px 0 16px; height:24px; line-height:20px;background:url(bg_h3.png) no-repeat; color:#333; line-height:28px; position:relative; overflow:hidden}
+.shadowtbg h3 .small,.shadowtbg h3 .close1,.shadowtbg h3 .close2,.shadowtbg h3 .close{background:url(bg_minclose.png) no-repeat;width:25px; height:19px;display:block; cursor:pointer;overflow:hidden;position:absolute;top:3px}
+.shadowtbg h3 .small{right:35px;}
+.shadowtbg h3 a.small:hover{ background-position:0px -19px;}
+.shadowtbg h3 a.close1{background-position: -25px 0px;right:10px;}
+.shadowtbg h3 a.close1:hover{ background-position:-25px -19px;}
+.shadowtbg h3 a.close2,.shadowtbg h3 .close{background-position: -50px 0px;right:10px;}
+.shadowtbg h3 a.close2:hover,.shadowtbg h3 a.close:hover{ background-position:-50px -19px;}
+
+
+
+/*IE6 locate*/
+html{_overflow-x:auto;_overflow-y:hidden;height:100%}
+
+#fbpl_overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1100;
+	background-color: rgb(119, 119, 119); 
+	opacity: 0.5; 
+	cursor: pointer; 
+	display: none;
+}
+#fbpl {
+	z-index: 1101;
+	left: 30px;
+	width:430px; 
+	position:absolute;
+	display:none
+}
+
+.remarkps{ padding-top:3px; height:250px; overflow:auto; }
+.remarkps div.fl{ width:380px; }
+.remarkps div.fl p{ float:left; line-height:27px;color:#666}
+.remarkps div.fl span.fl a{ line-height:27px;color:#666}
+.remarkps div.fl textarea{ border:1px solid #ccc; width:333px; height:100px;  padding:5px;}
+.remarkps div.fr{ width:380px; }
+.remarkps div.fr p{ float:left; line-height:27px;color:#666}
+.remarkps div.fr span.fl a{ line-height:27px;color:#666}
+.remarkps div.fr textarea{ border:1px solid #ccc; width:333px; height:100px;  padding:5px;}
+.submit{ width:83px; height:27px; background:url(button.png); border:0;  color:#fff;}
+
+.spm_div_hover{ background-color: #E0E0E0 !important; }
+.spm_div_active{ background-color: #E0E0C0 !important; }
+
+.spm_wf_field_placeholder{ display: none; }
+.spm_wf_field_settings{ display: none; }
+.spm_wf_wiki{ display: none; }
+.spm_wf_plain textarea {
+	border:1px solid #ccc; 
+	width:355px; 
+	height:60px; 
+	padding:5px;
+	}
+
+#spm_wf_editor_save2{
+	display:none;
+	bottom:115px;
+	right:20px;
+	_right:40px;
+	background-color: #E0E0B0 !important;
+	background:url(save.png) no-repeat center center;
+	height:32px;
+	width:32px; 
+	position:fixed; 
+	_position:absolute; 
+	z-index:100;
+	padding:3px;
+	}

@@ -1,0 +1,19 @@
+@charset "utf-8";
+
+a,.submit{ cursor:pointer}
+
+/*IE6 locate*/
+html{_overflow-x:auto;_overflow-y:hidden;height:100%}
+
+.spm_div_hover{ background-color: #E0E0E0 !important; }
+.spm_div_active{ background-color: #E0E0C0 !important; }
+.spm_div_conn_active{ background-color: #F0F0B0 !important; }
+.spm_div_src_active{ background-color: #C0E0E0 !important; }
+
+.spm_wf_field_settings{ display: none; }
+
+.spm_wf_exp_exp textarea{ border:1px solid #ccc; width:600px; height:100px;  padding:5px;}
+
+#spm_wf_expression_txt { border:1px solid #ccc; width:360px; height:200px;  padding:5px;}
+#spm_wf_exp_allows { border:1px solid #ccc; width:340px; height:120px;  padding:5px;}
+#spm_wf_exp_query { border:1px solid #ccc; width:340px; height:80px;  padding:5px;}

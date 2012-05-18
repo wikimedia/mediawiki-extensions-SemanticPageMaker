@@ -1,0 +1,227 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Widget Editor Help</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body topmargin="0" leftmargin="0" rightmargin="0" bottommargin="0" marginheight="0" marginwidth="0" bgcolor="#FFFFFF">
+
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0" background="img/topbkg.gif">
+  <tr>
+    <td width="50%" valign="top">
+			
+		</td>
+    <td width="50%" valign="top">
+      <p align="right"><img border="0" src="img/topright.gif" width="315" height="66">
+    </td>
+  </tr>
+</table>
+<table id="header" border="0" width="100%" cellspacing="0" cellpadding="0" background="img/blackline.gif">
+  <tr>
+		<td width="100%" style="height: 25px;">
+      <p align="left">
+      	<font color="#F0D8B8" face="Arial" size="2">
+	      	<b>&nbsp;&nbsp;<a href="help_SPM_designer.html">Category widget overview</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_connector.html">Action connector</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_simple_acl.html">Access control</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_field_widget.html">Field widget editing</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_edit.html">Form editing</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_video.html">Video Workthrough</a>&nbsp;&nbsp; |
+	      		 &nbsp;&nbsp;<a href="help_workflow.html">Demo: Build certain workflow</a>
+	        </b>
+      	</font>
+      </p>
+    </td>
+  </tr>
+</table>
+
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
+  <tr>
+  	<td width="220px" valign="top" style="padding-left: 70px;">
+  	<div id="leftPan">
+	  	<h2><a href="#l1">Overview</a></h2>
+			<h2><a href="#l2">Common Widget settings</a></h2>
+			<h2><a href="#l3">Widget datatypes</a></h2>
+			<ul>
+				<li><a href="#l3_1">Common types</a></li>
+				<li><a href="#l3_2">Text</a></li>
+				<li><a href="#l3_3">Date</a></li>
+				<li><a href="#l3_4">File</a></li>
+				<li><a href="#l3_5">Number</a></li>
+				<li><a href="#l3_6">UID</a></li>
+				<li><a href="#l3_7">Page</a></li>
+				<li><a href="#l3_8">Widget</a></li>
+			</ul>
+			<h2><a href="#l4">Widget views</a></h2>
+			<ul>
+				<li><a href="#l4_1">Table row</a></li>
+				<li><a href="#l4_2">Section</a></li>
+				<li><a href="#l4_3">Template(s)</a></li>
+			</ul>
+		</div>
+		</td>
+    <td valign="top" style="padding-left: 30px;">
+    <div id="rightPan">
+    		<div id="l1">
+		<h1>Overview</h1><hr/>
+		<p>
+			Each widget is bound to a field / semantic property. <br/>
+			Field widget helps on form generation / category page UI / field type checking.
+		</p>
+		<img src="img/7.png"/>
+	</div>
+	<div id="l2">
+		<h1>Common Widget settings</h1><hr/>
+		<p>
+			All field widget has the same basic settings. <br/>
+			* Label, label showed in page UI, mostly depends on widget view; <br/>
+			* Field, field name of template field, as well as the property name; <br/>
+			* Description, description which appears on auto-generated form, help users understanding what to input; <br/>
+			* Access control, please view <a href="help_simple_acl.html">Access control</a>.
+		</p>
+		<img src="img/f1.png"/>
+	</div>
+	<div id="l3">
+		<h1>Widget datatypes</h1><hr/>
+		<p>
+			Field widget has different datatypes. Users can choose datatype menu item, each field must have one datatype.
+		</p>
+		<img src="img/f2.png"/>
+	</div>
+	<div id="l3_1">
+		<h2>Common types</h2>
+		<p>
+			<b>media, string, email, url</b>
+		</p>
+		<img src="img/string.png"/>
+		<p>
+			Common types has the same settings, <br/>
+			* Default, default value of the field; <br/>
+			* Possible values, all possible values, same as SMW 'Property:Allows_value'. <br/>
+		<img src="img/common_possible.png"/><br/>
+			Possible values helps on auto form rendering. <br/>
+		<img src="img/common_possible2.png"/>
+		</p>
+	</div>
+	<div id="l3_2">
+		<h2>Text</h2>
+		<p>
+			No possible value for text type. <br/>
+			* Keyword '__ALWAYS_NEW__' means the text area always be blank on users' editing. Mostly used on new comment field, work with SemanticHistory/SemanticArchive extension.
+		</p>
+		<img src="img/text.png"/>
+	</div>
+	<div id="l3_3">
+		<h2>Date</h2>
+		<p>
+			Date picker UI bound to form field.
+		</p>
+		<img src="img/date_form.png"/>
+		<p>
+			* Keyword '__ALWAYS_NOW__' means the date value always set to 'NOW' on users' editing.
+		</p>
+		<img src="img/date.png"/>
+	</div>
+	<div id="l3_4">
+		<h2>File</h2>
+		<p>
+			Apply 'image' type for page rendering.
+		</p>
+		<img src="img/file.png"/>
+		<p>Form</p>
+		<img src="img/file_form.png"/><br/>
+		<img src="img/file_form2.png"/>
+		<p>View</p>
+		<img src="img/file_page.png"/>
+		<p>
+			Or use 'file link' only.
+		</p>
+		<img src="img/file2.png"/>
+	</div>
+	<div id="l3_5">
+		<h2>Number</h2>
+		<img src="img/number.png"/>
+		<p>
+			Apply number range check to form field.
+		</p>
+		<img src="img/number_1.png"/><br/>
+		<img src="img/number_form.png"/>
+	</div>
+	<div id="l3_6">
+		<h2>UID</h2>
+		<p>Generate UID for page.</p>
+		<img src="img/uid.png"/>
+	</div>
+	<div id="l3_7">
+		<h2>Page</h2>
+		<p>To customize possible values in different ways.</p>
+		<img src="img/page.png"/>
+		<p>From query results, if SMWHalo is deployed, QueryInterface may help.</p>
+		<img src="img/page2.png"/><br/>
+		<img src="img/page_1form.png"/>
+		<p>Ajax way to get page names by property / category / namespace.</p>
+		<img src="img/page3.png"/><br/>
+		<img src="img/page_2form.png"/>
+	</div>
+	<div id="l3_8">
+		<h2>Widget</h2>
+		<p>Use pre-defined category widget as compound data type, just import from other category widgets. </p>
+		<img src="img/widget.png"/>
+		<p>View</p>
+		<img src="img/widget_view.png"/>
+		<p>Form</p>
+		<img src="img/widget_form.png"/>
+	</div>
+	<div id="l4">
+		<h1>Widget views</h1><hr/>
+		<p>
+			Viewing widget
+		</p>
+		<img src="img/v_template.png"/>
+		<p>
+			* Editing index, specify the edit index of the field, the index will take effect on auto-generated form; <br/>
+			* Optional, whether the field is required, take effect on form editing; <br/>
+			* Multiple, whether the field has multiple values.
+		</p>
+	</div>
+	<div id="l4_1">
+		<h2>Table row</h2>
+		<p>Table viewing</p>
+		<img src="img/tablerow.png"/>
+		<p>View</p>
+		<img src="img/widget_table.png"/>
+	</div>
+	<div id="l4_2">
+		<h2>Section</h2>
+		<p>Section viewing</p>
+		<img src="img/section.png"/>
+		<p>View</p>
+		<img src="img/widget_section.png"/>
+	</div>
+	<div id="l4_3">
+		<h2>Template(s)</h2>
+		<p>
+			Template will have the following input,<br/>
+			<pre>
+field_label | field_property | {{{field_name|default value}}} | &lt;editidx=_IDX_&gt; | &lt;optional=true&gt; | &lt;multiple=true&gt; | &lt;other_parameters&gt;
+			</pre>
+			Template must have 'Category:SPM viewing templates'. <br/>
+			* Template:Value only, value as output; <br/>
+			* Template:Hidden field, no output there, just announce a widget field.
+		</p>
+		<img src="img/v_template.png"/>
+	</div>
+		</div>
+    </td>
+  </tr>
+</table>
+<table border="0" width="100%" cellspacing="0" cellpadding="0" background="img/botbkg.gif">
+  <tr>
+    <td width="100%"><img border="0" src="img/botbkg.gif" width="48" height="12"></td>
+  </tr>
+</table>
+</body>
+</html>
