@@ -81,7 +81,7 @@ spm_wf_field.data.push( {
 		$upload_window_page = SpecialPage::getPage( 'UploadWindow' );
 		$query_string = "sfInputID={$id1}";
 		if ( $multiple ) $query_string .= "&sfDelimiter=,";
-		$upload_window_url = $upload_window_page->getTitle()->getFullURL( $query_string );
+		$upload_window_url = $upload_window_page->getPageTitle()->getFullURL( $query_string );
 
 		$clazz = '';
 		if ( $multiple ) $clazz = 'spm_wf_multi_val';
