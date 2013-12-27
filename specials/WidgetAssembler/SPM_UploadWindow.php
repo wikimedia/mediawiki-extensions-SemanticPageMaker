@@ -262,16 +262,15 @@ class UploadWindowForm {
 		if ( !$wgUser->isAllowed( 'upload' ) ) {
 			if ( !$wgUser->isLoggedIn() ) {
 				$wgOut->showErrorPage( 'uploadnologin', 'uploadnologintext' );
+				return;
 			} else {
-				$wgOut->permissionRequired( 'upload' );
+				throw new PermissionsError( 'upload' );
 			}
-			return;
 		}
 
 		# Check blocks
 		if ( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage();
-			return;
+			throw new UserBlockedError( $wgUser->mBlock );
 		}
 
 		if ( wfReadOnly() ) {
@@ -380,8 +379,9 @@ class UploadWindowForm {
 		 * In some cases we may forbid overwriting of existing files.
 		 */
 		$overwrite = $this->checkOverwrite( $this->mDestName );
-		if ( WikiError::isError( $overwrite ) ) {
-			return $this->uploadError( $overwrite->toString() );
+		if ( $overwrite !== true ) {
+			$wgOut->showErrorPage( 'uploaderror', $overwrite );
+			return;
 		}
 
 		/* Don't allow users to override the blacklist (check file extension) */
@@ -405,8 +405,8 @@ class UploadWindowForm {
 			$this->checkMacBinary();
 			$veri = $this->verify( $this->mTempPath, $finalExt );
 
-			if ( $veri !== true ) { // it's a wiki error...
-				return $this->uploadError( $veri->toString() );
+			if ( $veri !== true ) {
+				return $this->uploadError( $veri->parse() );
 			}
 
 			/**
@@ -1104,7 +1104,7 @@ EOT
 	 *
 	 * @param string $tmpfile the full path of the temporary file to verify
 	 * @param string $extension The filename extension that the file is to be served with
-	 * @return mixed true of the file is verified, a WikiError object otherwise.
+	 * @return bool|Message true of the file is verified, a Message object otherwise.
 	 */
 	function verify( $tmpfile, $extension ) {
 		# magically determine mime type
@@ -1118,20 +1118,20 @@ EOT
 		wfDebug ( "\n\nmime: <$mime> extension: <$extension>\n\n" );
 			# check mime type against file extension
 			if ( !$this->verifyExtension( $mime, $extension ) ) {
-				return new WikiErrorMsg( 'uploadcorrupt' );
+				return wfMessage( 'uploadcorrupt' );
 			}
 
 			# check mime type blacklist
 			global $wgMimeTypeBlacklist;
 			if ( isset( $wgMimeTypeBlacklist ) && !is_null( $wgMimeTypeBlacklist )
 				&& $this->checkFileExtension( $mime, $wgMimeTypeBlacklist ) ) {
-				return new WikiErrorMsg( 'filetype-badmime', htmlspecialchars( $mime ) );
+				return wfMessage( 'filetype-badmime', htmlspecialchars( $mime ) );
 			}
 		}
 
 		# check for htmlish code and javascript
 		if ( $this->detectScript ( $tmpfile, $mime, $extension ) ) {
-			return new WikiErrorMsg( 'uploadscripted' );
+			return wfMessage( 'uploadscripted' );
 		}
 
 		/**
@@ -1139,7 +1139,7 @@ EOT
 		*/
 		$virus = $this->detectVirus( $tmpfile );
 		if ( $virus ) {
-			return new WikiErrorMsg( 'uploadvirus', htmlspecialchars( $virus ) );
+			return wfMessage( 'uploadvirus', htmlspecialchars( $virus ) );
 		}
 
 		wfDebug( __METHOD__ . ": all clear; passing.\n" );
@@ -1425,30 +1425,31 @@ EOT
 	 * Check if there's an overwrite conflict and, if so, if restrictions
 	 * forbid this user from performing the upload.
 	 *
-	 * @return mixed true on success, WikiError on failure
-	 * @access private
+	 * @return bool|Message True on success, Message on fail.
 	 */
 	function checkOverwrite( $name ) {
+		global $wgUser;
+
 		$img = wfFindFile( $name );
 
-		$error = '';
+		$error = false;
 		if ( $img ) {
-			global $wgUser, $wgOut;
 			if ( $img->isLocal() ) {
 				if ( !self::userCanReUpload( $wgUser, $img->name ) ) {
-					$error = 'fileexists-forbidden';
+					$error = wfMessage( 'fileexists-forbidden' );
 				}
 			} else {
 				if ( !$wgUser->isAllowed( 'reupload' ) ||
 				    !$wgUser->isAllowed( 'reupload-shared' ) ) {
-					$error = "fileexists-shared-forbidden";
+					$error = wfMessage( 'fileexists-shared-forbidden' );
 				}
 			}
 		}
 
 		if ( $error ) {
-			$errorText = wfMsg( $error, wfEscapeWikiText( $img->getName() ) );
-			return new WikiError( $wgOut->parse( $errorText ) );
+			$error->params( $img->getName() );
+
+			return $error;
 		}
 
 		// Rockin', go ahead and upload
