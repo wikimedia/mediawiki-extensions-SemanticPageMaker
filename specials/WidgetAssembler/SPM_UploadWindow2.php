@@ -243,7 +243,7 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 			$link = wfMsgExt(
 				$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted',
 				array( 'parse', 'replaceafter' ),
-				$wgUser->getSkin()->linkKnown(
+				Linker::linkKnown(
 					SpecialPage::getTitleFor( 'Undelete', SPMWidgetUtils::getTitlePrefixedText( $title ) ),
 					wfMsgExt( 'restorelink', array( 'parsemag', 'escape' ), $count )
 				)
@@ -283,16 +283,11 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 	 * @param array $warnings
 	 */
 	protected function uploadWarning( $warnings ) {
-		global $wgUser;
-
 		$sessionKey = $this->mUpload->stashSession();
-
-		$sk = $wgUser->getSkin();
 
 		$warningHtml = '<h2>' . wfMsgHtml( 'uploadwarning' ) . "</h2>\n"
 			. '<ul class="warning">';
 		foreach ( $warnings as $warning => $args ) {
-				$msg = '';
 				if ( $warning == 'exists' ) {
 					$msg = self::getExistsWarning( $args );
 				} elseif ( $warning == 'duplicate' ) {
@@ -566,16 +561,12 @@ END;
 	 * consisting of one or more <li> elements if there is a warning.
 	 */
 	public static function getExistsWarning( $exists ) {
-		global $wgUser, $wgContLang;
-
 		if ( !$exists )
 			return '';
 
 		$file = $exists['file'];
 		$filename = SPMWidgetUtils::getTitlePrefixedText( $file->getTitle() );
 		$warning = array();
-
-		$sk = $wgUser->getSkin();
 
 		if ( $exists['warning'] == 'exists' ) {
 			// Exact match
@@ -600,7 +591,7 @@ END;
 		} elseif ( $exists['warning'] == 'was-deleted' ) {
 			# If the file existed before and was deleted, warn the user of this
 			$ltitle = SpecialPage::getTitleFor( 'Log' );
-			$llink = $sk->linkKnown(
+			$llink = Linker::linkKnown(
 				$ltitle,
 				wfMsgHtml( 'deletionlog' ),
 				array(),

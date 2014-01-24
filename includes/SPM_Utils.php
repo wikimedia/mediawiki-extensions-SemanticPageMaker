@@ -18,11 +18,11 @@ class SPMUtils {
 	}
 
 	static function showCleanWikiOutput() {
-		global $wgOut, $wgUser;
+		global $wgOut;
 
+		$sk = $wgOut->getSkin();
 		$wgOut->disable();
 
-		$sk = $wgUser->getSkin();
 		$sk->initPage( $wgOut ); // need to call this to set skin name correctly
 
 //		global $wgJsMimeType, $wgStylePath, $wgStyleVersion,

@@ -300,7 +300,7 @@ class UploadWindowForm {
 	 * @access private
 	 */
 	function processUpload() {
-		global $wgUser, $wgOut;
+		global $wgOut;
 
 		if ( !wfRunHooks( 'UploadForm:BeforeProcessing', array( &$this ) ) )
 		{
@@ -444,9 +444,8 @@ class UploadWindowForm {
 
 			global $wgUploadSizeWarning;
 			if ( $wgUploadSizeWarning && ( $this->mFileSize > $wgUploadSizeWarning ) ) {
-				$skin = $wgUser->getSkin();
-				$wsize = $skin->formatSize( $wgUploadSizeWarning );
-				$asize = $skin->formatSize( $this->mFileSize );
+				$wsize =Linker::formatSize( $wgUploadSizeWarning );
+				$asize = Linker::formatSize( $this->mFileSize );
 				$warning .= '<li>' . wfMsgHtml( 'large-file', $wsize, $asize ) . '</li>';
 			}
 			if ( $this->mFileSize == 0 ) {
@@ -560,9 +559,9 @@ END;
 		}
 
 		if ( $file->exists() ) {
-			$dlink = $sk->makeKnownLinkObj( $file->getTitle() );
+			$dlink = Linker::makeKnownLinkObj( $file->getTitle() );
 			if ( $file->allowInlineDisplay() ) {
-				$dlink2 = $sk->makeImageLinkObj( $file->getTitle(), wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
+				$dlink2 = Linker::makeImageLinkObj( $file->getTitle(), wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
 					$file->getName(), 'right', array(), false, true );
 			} elseif ( !$file->allowInlineDisplay() && $file->isSafeFile() ) {
 				$icon = $file->iconThumb();
@@ -577,9 +576,9 @@ END;
 		} elseif ( $file_lc && $file_lc->exists() ) {
 			# Check if image with lowercase extension exists.
 			# It's not forbidden but in 99% it makes no sense to upload the same filename with uppercase extension
-			$dlink = $sk->makeKnownLinkObj( $nt_lc );
+			$dlink = Linker::makeKnownLinkObj( $nt_lc );
 			if ( $file_lc->allowInlineDisplay() ) {
-				$dlink2 = $sk->makeImageLinkObj( $nt_lc, wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
+				$dlink2 = Linker::makeImageLinkObj( $nt_lc, wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
 					$nt_lc->getText(), 'right', array(), false, true );
 			} elseif ( !$file_lc->allowInlineDisplay() && $file_lc->isSafeFile() ) {
 				$icon = $file_lc->iconThumb();
@@ -599,7 +598,7 @@ END;
 			$file_thb = wfLocalFile( $nt_thb );
 			if ( $file_thb->exists() ) {
 				# Check if an image without leading '180px-' (or similiar) exists
-				$dlink = $sk->makeKnownLinkObj( $nt_thb );
+				$dlink = Linker::makeKnownLinkObj( $nt_thb );
 				if ( $file_thb->allowInlineDisplay() ) {
 					$dlink2 = $sk->makeImageLinkObj( $nt_thb,
 						wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
@@ -828,7 +827,7 @@ END;
 	function mainUploadWindowForm( $msg = '' ) {
 		global $wgOut, $wgUser, $wgContLang;
 		global $wgUseCopyrightUpload, $wgUseAjax, $wgAjaxUploadDestCheck, $wgAjaxLicensePreview;
-		global $wgRequest, $wgAllowCopyUploads;
+		global $wgAllowCopyUploads;
 		global $wgStylePath, $wgStyleVersion;
 
 		$useAjaxDestCheck = $wgUseAjax && $wgAjaxUploadDestCheck;
@@ -856,7 +855,7 @@ wgAjaxLicensePreview = {$alp};
 				$link = wfMsgExt(
 					$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted',
 					array( 'parse', 'replaceafter' ),
-					$wgUser->getSkin()->makeKnownLinkObj(
+					Linker::makeKnownLinkObj(
 						SpecialPage::getTitleFor( 'Undelete', SPMWidgetUtils::getTitlePrefixedText( $title ) ),
 						wfMsgHtml( 'restorelink', $count )
 					)
