@@ -59,8 +59,7 @@ class SPMObjectEditor extends SpecialPage {
 
 		SPMWidgetUtils::applyWYSIWYG();
 
-		global $wgTitle;
-		$new_url = $wgTitle->getLocalURL( 'action=submit' );
+		$new_url = $this->getTitle()->getLocalURL( 'action=submit' );
 		$html = '
 <form method="post" action="' . $new_url . '">
 <input type="hidden" name="spm_title" value="' . str_replace( '"', '\"', $page_name ) . '"/>

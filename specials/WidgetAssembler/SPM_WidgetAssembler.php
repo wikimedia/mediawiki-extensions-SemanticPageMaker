@@ -75,8 +75,7 @@ class SPMWidgetAssembler extends SpecialPage {
 			}
 		}
 
-		global $wgTitle;
-		$new_url = $wgTitle->getLocalURL( 'action=submit' );
+		$new_url = $this->getTitle()->getLocalURL( 'action=submit' );
 		$html = '
 <div style="' . $extra_style . '">
 <form name="autoform" method="post" action="' . $new_url . '">

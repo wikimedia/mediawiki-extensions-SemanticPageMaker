@@ -38,7 +38,7 @@ class SPMWidgetStringType extends SPMWidgetDataType {
 			$params = array() ) {
 
 		if ( $this->getDefaultValue( $proptitle, $extra_semdata ) == '__ALWAYS_CURRENT_USER__' ) {
-			global $wgParser, $wgTitle, $wgUser;
+			global $wgParser, $wgUser;
 			$current_value = $this->getUser();
 		}
 

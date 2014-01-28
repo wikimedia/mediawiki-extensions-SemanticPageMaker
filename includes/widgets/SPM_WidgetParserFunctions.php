@@ -216,8 +216,7 @@ spm_wf_input.objs.push({
 		$params = func_get_args();
 		array_shift( $params ); // don't need the parser
 
-		global $wgTitle;
-		$defaultValue = $wgTitle->getPrefixedText();
+		$defaultValue = $parser->getTitle()->getPrefixedText();
 		$widgetName = $field_value = $extra = '';
 		$buttonStr = 'Create or edit';
 		// assign params - support unlabelled params, for backwards compatibility

@@ -660,8 +660,10 @@ spm_wf_editor.js.$smwgIQRunningNumber=' . $smwgIQRunningNumber . ';
 		wfProfileIn( __METHOD__ );
 		$this->addHTMLHeader();
 
-		global $wgOut, $wgTitle;
-		$wgOut->addWikiText( wfMsg( 'wf_wd_hint_wfedit', Title::newFromText( $wgTitle->getText(), NS_CATEGORY ) ) );
+		global $wgOut;
+		$wgOut->addWikiText( wfMsg( 'wf_wd_hint_wfedit',
+			Title::newFromText( $wgOut->getTitle()->getText(), NS_CATEGORY )
+		) );
 
 		$html = $this->getDesignerUI();
 
