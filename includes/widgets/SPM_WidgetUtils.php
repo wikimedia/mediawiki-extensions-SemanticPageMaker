@@ -289,10 +289,10 @@ class SPMWidgetUtils {
 		return true;
 	}
 
-	static function addWFInput() {
-		global $wgOut, $wgTitle;
+	static function addWFInput( $categoryPage ) {
+		global $wgOut;
 		$wgOut->addWikiText( wfMsg( 'wf_spm_hint_wfinput' ) );
-		$wgOut->addWikiText( "{{#wfinput:{$wgTitle->getText()}|}}" );
+		$wgOut->addWikiText( "{{#wfinput:{$categoryPage->getTitle()->getText()}|}}" );
 
 		return true;
 	}

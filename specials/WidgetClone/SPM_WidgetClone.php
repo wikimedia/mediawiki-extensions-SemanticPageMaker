@@ -67,8 +67,7 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 			( $parent == $w['category'] ? ' selected="selected"' : '' ) . '>' . $w['category'] . '</option>';
 		}
 
-		global $wgTitle;
-		$new_url = $wgTitle->getLocalURL( 'action=submit' );
+		$new_url = $this->getTitle()->getLocalURL( 'action=submit' );
 		$html = '
 <form method="post" action="' . $new_url . '">
 <div align="center">
