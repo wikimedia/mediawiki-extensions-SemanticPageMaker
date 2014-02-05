@@ -259,10 +259,9 @@ class SPMWidgetUtils {
 
 	static function addHTMLHeader( &$out ) {
 		// MediaWiki 1.17 introduces the Resource Loader.
-		global $wgTitle;
 		$realFunction = array( 'SMWOutputs', 'requireResource' );
 		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) && is_callable( $realFunction ) ) {
-			if ( $wgTitle->getNamespace() != NS_CATEGORY_WIDGET ) {
+			if ( $out->getTitle()->getNamespace() != NS_CATEGORY_WIDGET ) {
 				$out->addModules( 'ext.wes.spm_page' );
 			} else {
 				$out->addModules( 'ext.wes.spm_common' );
@@ -281,7 +280,7 @@ class SPMWidgetUtils {
 						'media' => 'screen, projection',
 						'href'  => $wgSPMScriptPath . '/skins/inettuts.css'
 					) );
-			if ( $wgTitle->getNamespace() != NS_CATEGORY_WIDGET ) {
+			if ( $out->getTitle()->getNamespace() != NS_CATEGORY_WIDGET ) {
 				$out->addScript( '<script type="text/javascript" src="' . $wgSPMScriptPath . '/scripts/spm_common.js"></script>' );
 			}
 		}

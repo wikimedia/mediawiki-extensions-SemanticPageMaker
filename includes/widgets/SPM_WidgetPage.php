@@ -278,14 +278,12 @@ class CategoryWidgetViewer {
 		$html = ( defined( 'SF_VERSION' ) ) ? '
 <i><a id="spm_wf_create_form" style="cursor:pointer">create a form</a> based on current widget.</i><br/>' : '';
 
-		global $wgTitle;
-		$link = Title::newFromText( "Special:WidgetClone/{$wgTitle->getText()}" );
+		$link = Title::newFromText( "Special:WidgetClone/{$this->getTitle()->getText()}" );
 		$url = $link->getFullUrl();
 		$html .= '
 <i><a id="spm_wf_clone" href="' . $url . '?' . rand() . '">duplicate current widget</a>.</i>';
 
-		global $wgTitle;
-		$url = $wgTitle->getFullURL( 'action=wcedit' );
+		$url = $this->getTitle()->getFullURL( 'action=wcedit' );
 
 		$html .= '
 <h1>' . wfMsg( 'wf_spm_preview' ) . '</h1>

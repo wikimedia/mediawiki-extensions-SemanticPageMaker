@@ -49,10 +49,10 @@ class SPMWidgetDateTimeType extends SPMWidgetDataType {
 			$params = array() ) {
 
 		if ( $this->getDefaultValue( $proptitle, $extra_semdata ) == '__ALWAYS_NOW__' ) {
-			global $wgParser, $wgTitle, $wgUser;
+			global $wgParser, $wgUser;
 			$current_value = $wgParser->preprocess(
 				'{{CURRENTYEAR}}/{{CURRENTMONTH}}/{{CURRENTDAY2}}T{{CURRENTTIME}}',
-				$wgTitle,
+				$title,
 				ParserOptions::newFromUser( $wgUser ) );
 		}
 

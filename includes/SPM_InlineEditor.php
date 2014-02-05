@@ -31,10 +31,11 @@ class SPMInlineEditor {
 		return false;
 	}
 	static function displayTabVector( &$obj, &$links ) {
-		global $wgUser, $wgTitle;
-		if ( $wgTitle->getNamespace() == NS_SPECIAL ) return true; // Special page
-		if ( $wgTitle->getNamespace() == NS_TEMPLATE ) return true; // Template page
-		if ( $wgTitle->getNamespace() == NS_CATEGORY_WIDGET ) return true; // Category widget page
+		global $wgUser;
+		$title = $obj->getTitle();
+		if ( $title->getNamespace() == NS_SPECIAL ) return true; // Special page
+		if ( $title->getNamespace() == NS_TEMPLATE ) return true; // Template page
+		if ( $title->getNamespace() == NS_CATEGORY_WIDGET ) return true; // Category widget page
 
 		$content_actions = $links['views'];
 		// Check if edit tab is present, if not don't at WIEdit tab
@@ -43,12 +44,12 @@ class SPMInlineEditor {
 		global $wgUser, $wgRequest;
 		$action = $wgRequest->getText( 'action' );
 		// Build WIEdit tab
-		global $wgArticle;
-		$oldid = $wgArticle->getOldID() == 0 ? '' : 'oldid=' . $wgArticle->getOldID() . '&';
+		$article = new Article( $title );
+		$oldid = $article->getOldID() == 0 ? '' : 'oldid=' . $article->getOldID() . '&';
 		$main_action['wiedit'] = array(
 	        	'class' => ( $action == 'wiedit' ) ? 'selected' : false,
 	        	'text' => wfMsg( 'wiedit_tab' ), // Title of the tab
-	        	'href' => $wgTitle->getLocalUrl( $oldid . 'action=wiedit' )   // where it links to
+	        	'href' => $title->getLocalUrl( $oldid . 'action=wiedit' )   // where it links to
 		);
 
 		// Find position of edit button
@@ -86,8 +87,9 @@ class SPMInlineEditor {
 			count( $content_actions );
 
 		// Build WIEdit tab
-		global $wgArticle, $wgSPMRenameTab;
-		$oldid = $wgArticle->getOldID() == 0 ? '' : 'oldid=' . $wgArticle->getOldID() . '&';
+		global $wgSPMRenameTab;
+		$article = new Article( $wgTitle );
+		$oldid = $article->getOldID() == 0 ? '' : 'oldid=' . $article->getOldID() . '&';
 		$wiaction = ( $action == 'wiedit' ) ?
 				array(
 		        'class' => 'selected',
@@ -155,7 +157,7 @@ class SPMInlineEditor {
 		if ( defined( 'MW_SUPPORTS_RESOURCE_MODULES' ) && is_callable( $realFunction ) ) {
 			$out->addModules( 'ext.wes.inline' );
 		} else {
-			global $wgTitle, $wgSPMScriptPath;
+			global $wgSPMScriptPath;
 			$out->addLink( array(
 						'rel'   => 'stylesheet',
 						'type'  => 'text/css',
@@ -189,12 +191,11 @@ class SPMInlineEditor {
 	public static function parserBeforeInternalParse( &$parser, &$text, &$state ) {
 		if ( SPMInlineEditor::$editorBound ) return true;
 
-		global $wgTitle;
-		if ( !$wgTitle->exists() ) return true;
+		if ( !$parser->getTitle()->exists() ) return true;
 
 		$wom = WOMProcessor::parseToWOM( $text );
 		$text = SPMProcessor::getInlineEditText( $wom, count( SPMInlineEditor::$wom ) . '_' );
-		SPMInlineEditor::$wom[] = array( 'page_name' => $wgTitle->getFullText(), 'wom' => $wom );
+		SPMInlineEditor::$wom[] = array( 'page_name' => $parser->getTitle()->getFullText(), 'wom' => $wom );
 
 		// FIXME: the first text piece should always be page content. not good
 		SPMInlineEditor::$editorBound = true;
@@ -225,7 +226,7 @@ class SPMInlineEditor {
 	// just put it away for the prototype
 	public static function bindEditor( &$out ) {
 		$script = '';
-		global $wgTitle;
+
 		foreach ( SPMInlineEditor::$wom as $prefix => $obj ) {
 			$page_name = $obj['page_name'];
 			$wom = $obj['wom'];
@@ -233,7 +234,7 @@ class SPMInlineEditor {
 			$title = Title::newFromText( $page_name );
 			$article = new Article( $title );
 			$rid = 0;
-			if ( $wgTitle->getFullText() == $page_name ) {
+			if ( $out->getTitle()->getFullText() == $page_name ) {
 				$rid = $article->getOldID();
 				if ( $rid == 0 ) {
 					$revision = Revision::newFromTitle( $title );
@@ -246,7 +247,7 @@ class SPMInlineEditor {
 				$link = Title::newFromText( "Special:ObjectEditor/{$rid}/{$id}/{$page_name}" );
 				$url = $link->getFullUrl();
 
-				$title = ( ( $wgTitle->getFullText() != $page_name ) ? "Be careful! Editing another page!! " : "" ) .
+				$title = ( ( $out->getTitle()->getFullText() != $page_name ) ? "Be careful! Editing another page!! " : "" ) .
 					"Editing {$obj->getTypeID()} in {$page_name} ";
 
 				$url = str_replace( "'", "\\'", $url );
