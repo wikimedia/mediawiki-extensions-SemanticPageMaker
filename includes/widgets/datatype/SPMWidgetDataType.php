@@ -531,7 +531,7 @@ jQuery(document).ready(function(){spm_wf_field.js.bindFields();});
 
 	/**
 	 * Return TRUE if a value was defined and understood by the given type,
-	 * and false if parsing errors occured or no value was given.
+	 * and false if parsing errors occurred or no value was given.
 	 */
 	public function isValid() {
 		return ( ( !$this->mHasErrors ) );
