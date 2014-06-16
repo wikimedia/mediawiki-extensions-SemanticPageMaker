@@ -208,7 +208,7 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 			'sfInputID' => $this->mInputID,
 			'sfDelimiter' => $this->mDelimiter,
 		) );
-		$form->setTitle( $this->getTitle() );
+		$form->setTitle( $this->getPageTitle() );
 
 		# Check the token, but only if necessary
 		if ( !$this->mTokenOk && !$this->mCancelUpload
