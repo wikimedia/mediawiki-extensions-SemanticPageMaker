@@ -401,7 +401,7 @@ class UploadWindowForm {
 		 * probably not accept it.
 		 */
 		if ( !$this->mStashed ) {
-			$this->mFileProps = File::getPropsFromPath( $this->mTempPath, $finalExt );
+			$this->mFileProps = FSFile::getPropsFromPath( $this->mTempPath, $finalExt );
 			$this->checkMacBinary();
 			$veri = $this->verify( $this->mTempPath, $finalExt );
 
