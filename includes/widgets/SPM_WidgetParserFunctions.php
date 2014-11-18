@@ -13,8 +13,8 @@ class SPMWidgetParserFunctions {
 		// the following code copied from SemanticForms extension, in case SemanticForms extension is not deployed
 		if ( !defined( 'SF_VERSION' ) ) {
 			if ( defined( get_class( $parser ) . '::SFH_OBJECT_ARGS' ) ) {
-				$parser->setFunctionHook( 'arraymap', array( 'SPMWidgetParserFunctions', 'renderArrayMapObj' ), SFH_OBJECT_ARGS );
-				$parser->setFunctionHook( 'arraymaptemplate', array( 'SPMWidgetParserFunctions', 'renderArrayMapTemplateObj' ), SFH_OBJECT_ARGS );
+				$parser->setFunctionHook( 'arraymap', array( 'SPMWidgetParserFunctions', 'renderArrayMapObj' ), Parser::SFH_OBJECT_ARGS );
+				$parser->setFunctionHook( 'arraymaptemplate', array( 'SPMWidgetParserFunctions', 'renderArrayMapTemplateObj' ), Parser::SFH_OBJECT_ARGS );
 			} else {
 				$parser->setFunctionHook( 'arraymap', array( 'SPMWidgetParserFunctions', 'renderArrayMap' ) );
 				$parser->setFunctionHook( 'arraymaptemplate', array( 'SPMWidgetParserFunctions', 'renderArrayMapTemplate' ) );
@@ -425,7 +425,7 @@ spm_wf_input.objs.push({
 	}
 
 	/**
-	 * SFH_OBJ_ARGS
+	 * Parser::SFH_OBJ_ARGS
 	 * {{#arraymap:value|delimiter|var|formula|new_delimiter}}
 	 */
 	static function renderArrayMapObj( &$parser, $frame, $args ) {
@@ -494,7 +494,7 @@ spm_wf_input.objs.push({
 	}
 
 	/**
-	 * SFH_OBJ_ARGS
+	 * Parser::SFH_OBJ_ARGS
 	 * {{#arraymaptemplate:value|template|delimiter|new_delimiter}}
 	 */
 	static function renderArrayMapTemplateObj( &$parser, $frame, $args ) {
