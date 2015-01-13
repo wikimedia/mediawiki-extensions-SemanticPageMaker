@@ -114,10 +114,6 @@ class SFAutocompleteAPI extends ApiBase {
 		);
 	}
 
-	public function getVersion() {
-		return __CLASS__ . ': $Id: SF_AutocompleteAPI.php 8139 2010-09-23 14:02:56Z robotta $';
-	}
-
 	public static function getAllValuesForProperty( $is_relation, $property_name, $substring = null ) {
 		global $sfgMaxAutocompleteValues;
 
