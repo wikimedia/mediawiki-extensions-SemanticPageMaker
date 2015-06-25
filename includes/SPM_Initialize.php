@@ -84,7 +84,7 @@ function smwfSPMGetAjaxMethodPrefix() {
  */
 function wgSPMSetupExtension() {
 	global $wgSPMIP, $wgHooks, $wgExtensionCredits, $wgAvailableRights;
-	global $wgAutoloadClasses, $wgSpecialPages, $wgSpecialPageGroups;
+	global $wgAutoloadClasses, $wgSpecialPages;
 
 	smwfSPMInitMessages();
 	if ( !defined( 'WOM_VERSION' ) ) {
@@ -142,7 +142,6 @@ function wgSPMSetupExtension() {
 	} else { // otherwise register special pages
 		$wgAutoloadClasses['SPMObjectEditor'] = $wgSPMIP . '/specials/WikiObjectEditor/SPM_ObjectEditor.php';
 		$wgSpecialPages['ObjectEditor'] = array( 'SPMObjectEditor' );
-		$wgSpecialPageGroups['ObjectEditor'] = 'smw_group';
 	}
 
 	// resource loader

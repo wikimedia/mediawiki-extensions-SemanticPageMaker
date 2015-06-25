@@ -42,7 +42,7 @@ function wgSPMWidgetSetupExtension() {
 	global $wgSPMIP;
 	require_once( $wgSPMIP . '/includes/widgets/SPM_WidgetSetup.php' );
 
-	global $wgHooks, $wgAutoloadClasses, $wgSpecialPages, $wgSpecialPageGroups;
+	global $wgHooks, $wgAutoloadClasses, $wgSpecialPages;
 
     // we widget
 	$wgAutoloadClasses['SPMArticleUtils'] = $wgSPMIP . '/includes/widgets/SPM_ArticleUtils.php';
@@ -107,11 +107,9 @@ function wgSPMWidgetSetupExtension() {
 	} else { // otherwise register special pages
 		$wgAutoloadClasses['SPMWidgetAssembler'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_WidgetAssembler.php';
 		$wgSpecialPages['WidgetAssembler'] = array( 'SPMWidgetAssembler' );
-		$wgSpecialPageGroups['WidgetAssembler'] = 'smw_group';
 
 		$wgAutoloadClasses['SPMWidgetClone'] = $wgSPMIP . '/specials/WidgetClone/SPM_WidgetClone.php';
 		$wgSpecialPages['WidgetClone'] = array( 'SPMWidgetClone' );
-		$wgSpecialPageGroups['WidgetClone'] = 'smw_group';
 
 		if ( defined( 'SMW_HALO_VERSION' ) && version_compare( SMW_HALO_VERSION, '1.5', '>=' ) ) {
 			$wgAutoloadClasses['SPMQueryInterface'] = $wgSPMIP . '/specials/SPMQueryInterface/SPM_QueryInterface.php';

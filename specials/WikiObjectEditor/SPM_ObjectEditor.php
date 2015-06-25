@@ -123,4 +123,8 @@ else
 
 		return true;
 	}
+
+	protected function getGroupName() {
+		return 'smw_group';
+	}
 }
