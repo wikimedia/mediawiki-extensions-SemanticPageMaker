@@ -59,7 +59,7 @@ class SFUtils {
 			$new_url = $title;
 		global $wgUser;
 		if ( $wgUser->isLoggedIn() )
-			$token = htmlspecialchars( $wgUser->editToken() );
+			$token = htmlspecialchars( $wgUser->getEditToken() );
 		else
 			$token = EDIT_TOKEN_SUFFIX;
 
