@@ -43,8 +43,7 @@ class SFUtils {
 			return $name; // TODO maybe report an error here?
 		}
 		if ( NULL === $text ) $text = $title->getText();
-		$l = new Linker();
-		return $l->makeLinkObj( $title, $text );
+		return Linker::link( $title, $text );
 	}
 
 	/**
