@@ -218,7 +218,7 @@ class UploadWindowForm {
 		unset( $this->mCurlDestHandle );
 		if ( $error ) {
 			unlink( $dest );
-			if ( wfEmptyMsg( "upload-curl-error$errornum", wfMsg( "upload-curl-error$errornum" ) ) )
+			if ( Message::newFromKey( "upload-curl-error$errornum", wfMsg( "upload-curl-error$errornum" ) )->isDisabled() )
 				$wgOut->errorPage( 'upload-misc-error', 'upload-misc-error-text' );
 			else
 				$wgOut->errorPage( "upload-curl-error$errornum", "upload-curl-error$errornum-text" );
