@@ -641,8 +641,13 @@ END;
 			# If the file existed before and was deleted, warn the user of this
 			# Don't bother doing so if the image exists now, however
 			$ltitle = SpecialPage::getTitleFor( 'Log' );
-			$llink = $sk->makeKnownLinkObj( $ltitle, wfMsgHtml( 'sf_deletionlog' ),
-				'type=delete&page=' . $file->getTitle()->getPrefixedUrl() );
+			$llink = Linker::link(
+				$ltitle,
+				wfMsgHtml( 'sf_deletionlog' ),
+				array(),
+				array( 'type' => 'delete', 'page' => $file->getTitle()->getPrefixedUrl() ),
+				array( 'known' )
+			);
 			$warning .= '<li>' . wfMsgWikiHtml( 'filewasdeleted', $llink ) . '</li>';
 		}
 		return $warning;
