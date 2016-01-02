@@ -453,7 +453,7 @@ class UploadWindowForm {
 			}
 
 			if ( !$this->mDestWarningAck ) {
-				$warning .= self::getExistsWarning( $this->mLocalFile );
+				$warning .= $this->getExistsWarning( $this->mLocalFile );
 			}
 			if ( $warning != '' ) {
 				/**
@@ -532,7 +532,7 @@ END;
 	 * Returns an HTML fragment consisting of one or more LI elements if there is a warning
 	 * Returns an empty string if there is no warning
 	 */
-	static function getExistsWarning( $file ) {
+	function getExistsWarning( $file ) {
 		global $wgUser;
 		// Check for uppercase extension. We allow these filenames but check if an image
 		// with lowercase extension exists already
@@ -544,7 +544,7 @@ END;
 		} else {
 			list( $partname, $rawExtension ) = explode( '.', $file->getName(), 2 );
 		}
-		$sk = $wgUser->getSkin();
+		$sk = $this->getSkin();
 
 		if ( $rawExtension != $file->getExtension() ) {
 			// We're not using the normalized form of the extension.
@@ -631,7 +631,7 @@ END;
 		return $warning;
 	}
 
-	static function ajaxGetExistsWarning( $filename ) {
+	function ajaxGetExistsWarning( $filename ) {
 		$file = wfFindFile( $filename );
 		if ( !$file ) {
 			// Force local file so we have an object to do further checks against
@@ -640,7 +640,7 @@ END;
 		}
 		$s = '&#160;';
 		if ( $file ) {
-			$warning = self::getExistsWarning( $file );
+			$warning = $this->getExistsWarning( $file );
 			if ( $warning !== '' ) {
 				$s = "<ul>$warning</ul>";
 			}
@@ -1035,7 +1035,7 @@ EOT
 	$warningRow
 	<tr>
 		<td></td>
-		<td align='$align2'><input tabindex='9' type='submit' name='wpUpload' value=\"{$ulb}\"" . $wgUser->getSkin()->tooltipAndAccesskey( 'upload' ) . " /></td>
+		<td align='$align2'><input tabindex='9' type='submit' name='wpUpload' value=\"{$ulb}\"" . $this->getSkin()->tooltipAndAccesskey( 'upload' ) . " /></td>
 	</tr>
 	<tr>
 		<td></td>
