@@ -142,9 +142,7 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 
 		# Check blocks
 		if ( $wgUser->isBlocked() ) {
-			$wgOut->blockedPage();
-			SPMUtils::showCleanWikiOutput();
-			return;
+			throw new UserBlockedError( $wgUser->getBlock() );
 		}
 
 		# Check whether we actually want to allow changing stuff
