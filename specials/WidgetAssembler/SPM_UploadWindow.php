@@ -558,7 +558,13 @@ END;
 		}
 
 		if ( $file->exists() ) {
-			$dlink = Linker::makeKnownLinkObj( $file->getTitle() );
+			$dlink = Linker::link(
+				$file->getTitle(),
+				null,
+				array(),
+				array(),
+				array( 'known' )
+			);
 			if ( $file->allowInlineDisplay() ) {
 				$dlink2 = Linker::makeImageLinkObj( $file->getTitle(), wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
 					$file->getName(), 'right', array(), false, true );
@@ -575,7 +581,13 @@ END;
 		} elseif ( $file_lc && $file_lc->exists() ) {
 			# Check if image with lowercase extension exists.
 			# It's not forbidden but in 99% it makes no sense to upload the same filename with uppercase extension
-			$dlink = Linker::makeKnownLinkObj( $nt_lc );
+			$dlink = Linker::link(
+				$nt_lc,
+				null,
+				array(),
+				array(),
+				array( 'known' )
+			);
 			if ( $file_lc->allowInlineDisplay() ) {
 				$dlink2 = Linker::makeImageLinkObj( $nt_lc, wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
 					$nt_lc->getText(), 'right', array(), false, true );
@@ -597,7 +609,13 @@ END;
 			$file_thb = wfLocalFile( $nt_thb );
 			if ( $file_thb->exists() ) {
 				# Check if an image without leading '180px-' (or similiar) exists
-				$dlink = Linker::makeKnownLinkObj( $nt_thb );
+				$dlink = Linker::link(
+					$nt_thb,
+					null,
+					array(),
+					array(),
+					array( 'known' )
+				);
 				if ( $file_thb->allowInlineDisplay() ) {
 					$dlink2 = $sk->makeImageLinkObj( $nt_thb,
 						wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
@@ -854,9 +872,12 @@ wgAjaxLicensePreview = {$alp};
 				$link = wfMsgExt(
 					$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted',
 					array( 'parse', 'replaceafter' ),
-					Linker::makeKnownLinkObj(
+					Linker::link(
 						SpecialPage::getTitleFor( 'Undelete', SPMWidgetUtils::getTitlePrefixedText( $title ) ),
-						wfMsgHtml( 'restorelink', $count )
+						wfMsgHtml( 'restorelink', $count ),
+						array(),
+						array(),
+						array( 'known' )
 					)
 				);
 				$wgOut->addHTML( "<div id=\"contentSub2\">{$link}</div>" );
