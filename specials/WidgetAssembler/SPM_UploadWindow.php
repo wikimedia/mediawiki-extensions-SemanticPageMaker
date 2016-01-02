@@ -182,8 +182,7 @@ class UploadWindowForm {
 		global $wgUser, $wgOut;
 
 		if ( !$wgUser->isAllowed( 'upload_by_url' ) ) {
-			$wgOut->permissionRequired( 'upload_by_url' );
-			return true;
+			throw new PermissionsError( 'upload_by_url' );
 		}
 
 		# Maybe remove some pasting blanks :-)

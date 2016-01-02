@@ -134,7 +134,7 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 				// Custom message if logged-in users without any special rights can upload
 				$wgOut->showErrorPage( 'uploadnologin', 'uploadnologintext' );
 			} else {
-				$wgOut->permissionRequired( 'upload' );
+				throw new PermissionsError( 'upload' );
 			}
 			SPMUtils::showCleanWikiOutput();
 			return;
