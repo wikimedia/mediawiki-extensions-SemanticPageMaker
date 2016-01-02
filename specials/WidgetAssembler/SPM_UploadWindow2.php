@@ -222,7 +222,7 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 
 		# Add footer to form
 		$uploadFooter = wfMsgNoTrans( 'uploadfooter' );
-		if ( $uploadFooter != '-' && !wfEmptyMsg( 'uploadfooter', $uploadFooter ) ) {
+		if ( $uploadFooter != '-' && !Message::newFromKey( 'uploadfooter', $uploadFooter )->isDisabled() ) {
 			$form->addPostText( '<div id="mw-upload-footer-message">'
 				. $wgOut->parse( $uploadFooter ) . "</div>\n" );
 		}
