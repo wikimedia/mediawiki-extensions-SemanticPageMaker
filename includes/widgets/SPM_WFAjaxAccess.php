@@ -17,19 +17,19 @@ function spm_wf_EditorAccess( $method ) {
 	array_shift( $params ); // do not need method
 
 	if ( $method == "getConnectorHtmlEmpty" ) {
-		return wfMsg( 'wf_wc_html_exp', '', '', wfMsg( 'wf_wc_html_exp_src', '' ) );
+		return wfMessage( 'wf_wc_html_exp', '', '', wfMessage( 'wf_wc_html_exp_src', '' )->text() )->text();
 	} elseif ( $method == "getConnectorSrcHtmlEmpty" ) {
-		return wfMsg( 'wf_wc_html_exp_src', '' );
+		return wfMessage( 'wf_wc_html_exp_src', '' )->text();
 	} elseif ( $method == "getWidgetConnectorHtml" ) {
 		$namespace = intval( array_shift( $params ) );
 		$name = array_shift( $params );
-		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMsg( 'spm_ajax_fail' );
+		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		return SPMWidgetUtils::getFieldConnectorHtml( $name );
 	} elseif ( $method == "getParentWidgetConnectorHtml" ) {
 		$namespace = intval( array_shift( $params ) );
 		$name = array_shift( $params );
-		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMsg( 'spm_ajax_fail' );
+		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		$title = Title::newFromText( $name, NS_CATEGORY );
 		$html = '';
@@ -41,11 +41,11 @@ function spm_wf_EditorAccess( $method ) {
 	} elseif ( $method == "updateWidgetConnectors" ) {
 		$namespace = intval( array_shift( $params ) );
 		$name = array_shift( $params );
-		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMsg( 'spm_ajax_fail' );
+		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		$ret = SPMWidgetUtils::updateWidgetConnectors( Title::newFromText( $name, $namespace ), $params );
 		if ( $ret === true )
-			return wfMsg( 'spm_ajax_success' );
+			return wfMessage( 'spm_ajax_success' )->text();
 
 		return $ret;
 	} elseif ( $method == "hitTransaction" ) {
@@ -116,10 +116,10 @@ function spm_wf_EditorAccess( $method ) {
 //		$context_after = array_shift( $params );
 
 		$view = SPMWidgetViewUtils::getView( $view );
-		if ( $view == null ) return wfMsg( 'spm_ajax_fail' );
+		if ( $view == null ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		$datatype = SPMWidgetDataTypeUtils::getDateType( $datatype );
-		if ( $datatype == null ) return wfMsg( 'spm_ajax_fail' );
+		if ( $datatype == null ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		$extra_params = $datatype->getFieldParameters( $params );
 
@@ -132,13 +132,13 @@ function spm_wf_EditorAccess( $method ) {
 		$article = new Article( $title );
 		$ret = $article->doDelete( 'Deleted by Widget Designer' );
 
-		return wfMsg( 'spm_ajax_success' );
+		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "updatePropertyDefinition" ) {
 		$title = array_shift( $params );
 		$name = array_shift( $params );
 		$type = array_shift( $params );
 		$dt = SPMWidgetDataTypeUtils::getDateType( $type );
-		if ( $dt == null ) return wfMsg( 'spm_ajax_fail' );
+		if ( $dt == null ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		$text = $dt->getPropertyWiki( $params );
 
@@ -146,7 +146,7 @@ function spm_wf_EditorAccess( $method ) {
 		$article = new Article( $title );
 		$ret = $article->doEdit( $text, 'Edit by Widget Designer' );
 
-		return wfMsg( 'spm_ajax_success' );
+		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "resetPropertyDefinition" ) {
 		global $wgUser;
 		foreach ( $params as $param ) {
@@ -170,12 +170,12 @@ function spm_wf_EditorAccess( $method ) {
 			if ( $revision == null ) continue;
 			if ( $revision->isCurrent() ) continue;
 			// revert
-			$summary = wfMsg( 'revertpage', $revision->getUserText(), $wgUser->getName() );
+			$summary = wfMessage( 'revertpage', $revision->getUserText(), $wgUser->getName() )->text();
 
 			$article = new Article( $revision->getTitle() );
 			$status = $article->doEdit( $revision->getText(), $summary, 0, $rid );
 		}
-		return wfMsg( 'spm_ajax_success' );
+		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "refreshPropertyRevision" ) {
 		$name = array_shift( $params );
 		$wiki = '';
@@ -214,7 +214,7 @@ function spm_wf_EditorAccess( $method ) {
 		$namespace = intval( array_shift( $params ) );
 		$name = array_shift( $params );
 		$text = array_shift( $params );
-		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMsg( 'spm_ajax_fail' );
+		if ( $namespace != NS_CATEGORY_WIDGET ) return wfMessage( 'spm_ajax_fail' )->text();
 
 		// create template content
 		$title = Title::newFromText( $name, NS_TEMPLATE );
@@ -253,7 +253,7 @@ function spm_wf_EditorAccess( $method ) {
 			}
 		}
 
-		return wfMsg( 'spm_ajax_success' );
+		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "createFormPage" ) {
 		$widget_name = array_shift( $params );
 		$ret = 0;
@@ -378,6 +378,6 @@ if a page with that name already exists, you will be sent to a form to edit that
 			if ( $ret !== FALSE ) return $ret;
 		}
 
-		return wfMsg( 'spm_ajax_fail' );
+		return wfMessage( 'spm_ajax_fail' )->text();
 	}
 }

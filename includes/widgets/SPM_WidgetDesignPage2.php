@@ -249,7 +249,7 @@ spm_wf_editor.view['{$v->getTypeID()}'] = {
 		$wiki = '';
 		foreach ( $widgets as $w ) {
 			$tit = Title::newFromText( $w['category'], NS_CATEGORY_WIDGET );
-			$wiki .= wfMsg( 'wf_spm_parent', $tit->getFullURL( 'action=wcedit' ), $tit->getText() );
+			$wiki .= wfMessage( 'wf_spm_parent', $tit->getFullURL( 'action=wcedit' ), $tit->getText() )->text();
 			$wiki .= $this->loadWidget( $w['value'], true );
 		}
 		return $wiki;
@@ -262,7 +262,6 @@ spm_wf_editor.view['{$v->getTypeID()}'] = {
 <div id="spm_wf_main_container">
 <div id="spm_wf_main">
 ' . $this->loadParentWidgets( $widgets ) . '
-' . /*wfMsg('wf_spm_current') .*/ '
 <div id="spm_wf_current">
 ';
 
@@ -291,9 +290,9 @@ spm_wf_editor.view['{$v->getTypeID()}'] = {
 
 		$html = CategoryWidgetDesignViewer2::getToolbarHtml() .
 CategoryWidgetDesignViewer2::getExpressionHelpHtml() . '
-<h1>' . wfMsg( 'wf_spm_connector' ) . '</h1>
+<h1>' . wfMessgae( 'wf_spm_connector' )->escaped() . '</h1>
 ' . $this->loadFieldConnectors() . '
-<h1>' . wfMsg( 'wf_spm_preview' ) . '</h1>
+<h1>' . wfMessgae( 'wf_spm_preview' )->escaped() . '</h1>
 ' . $this->loadWidgetView();
 
 		wfProfileOut( __METHOD__ );

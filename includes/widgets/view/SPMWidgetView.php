@@ -58,18 +58,18 @@ abstract class SPMWidgetView {
           <tr>
             <td>
               <label>
-                <span style="margin-left:10px;">' . wfMsg( 'spm_wd_v_editidx' ) . '</span>
-                <span class="small" style="width:180px;">' . wfMsg( 'spm_wd_v_editidx_help' ) . '</span>
+                <span style="margin-left:10px;">' . wfMessage( 'spm_wd_v_editidx' )->escaped() . '</span>
+                <span class="small" style="width:180px;">' . wfMessage( 'spm_wd_v_editidx_help' )->escaped() . '</span>
               </label>
               <input type="text" value="" id="spm_wf_view_editidx" style="margin: 2px 0px 0px 15px;width:20px;">
               <div style="clear:both;"></div>
-              <label>' . wfMsg( 'spm_wd_v_optional' ) . '
-                <span class="small">' . wfMsg( 'spm_wd_v_optional_help' ) . '</span>
+              <label>' . wfMessage( 'spm_wd_v_optional' )->escaped() . '
+                <span class="small">' . wfMessage( 'spm_wd_v_optional_help' )->escaped() . '</span>
               </label>
               <input type="checkbox" id="spm_wf_view_optional" style="width:auto;">
               <div style="clear:both;"></div>
-              <label>' . wfMsg( 'spm_wd_v_multiple' ) . '
-                <span class="small">' . wfMsg( 'spm_wd_v_multiple_help' ) . '</span>
+              <label>' . wfMessage( 'spm_wd_v_multiple' )->escaped() . '
+                <span class="small">' . wfMessage( 'spm_wd_v_multiple_help' )->escaped() . '</span>
               </label>
               <input type="checkbox" id="spm_wf_view_multiple" style="width:auto;">
               <div style="clear:both;"></div>

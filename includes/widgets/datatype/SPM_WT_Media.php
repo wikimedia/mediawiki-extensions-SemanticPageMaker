@@ -88,7 +88,7 @@ spm_wf_field.data.push( {
 		if ( $optional ) $clazz .= ' spm_wf_optional_val';
 		return '<input id="' . $id1 . '" class="spm_wf_val ' . $clazz . '" name="' . $name .
 '" type="text" value="' . str_replace( '"', '\"', $current_value ) . '"/>
-<a id="' . $id2 . '" href="' . $upload_window_url . '">' . wfMsg( 'upload' ) . '</a>';
+<a id="' . $id2 . '" href="' . $upload_window_url . '">' . wfMessage( 'upload' )->escaped() . '</a>';
 	}
 
 	protected function getSampleWikiOnEmpty() {

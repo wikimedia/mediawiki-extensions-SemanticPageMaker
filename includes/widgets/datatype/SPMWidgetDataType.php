@@ -69,15 +69,15 @@ abstract class SPMWidgetDataType {
 		return '
           <tr>
             <td>
-              <label style="width:150px;">' . wfMsg( 'spm_wd_dt_default' ) . '
-                <span class="small" style="width:150px;">' . wfMsg( 'spm_wd_dt_default_help' ) . '</span>
+              <label style="width:150px;">' . wfMessage( 'spm_wd_dt_default' )->escaped() . '
+                <span class="small" style="width:150px;">' . wfMessage( 'spm_wd_dt_default_help' )->escaped() . '</span>
               </label>
               <input type="text" value="" id="spm_wf_field_default" style="margin: 2px 0px 0px 10px;">
               <div style="clear:both;"></div>
               <hr size="1" color="#b7ddf2" />
               <label style="text-align:left;">
-              	<span style="margin-left:10px;">' . wfMsg( 'spm_wd_dt_possible' ) . '</span>
-                <span class="small">' . wfMsg( 'spm_wd_dt_possible_help' ) . '</span>
+              	<span style="margin-left:10px;">' . wfMessage( 'spm_wd_dt_possible' )->escaped() . '</span>
+                <span class="small">' . wfMessage( 'spm_wd_dt_possible_help' )->escaped() . '</span>
               </label>
               <textarea id="spm_wf_prop_allows" style="margin: 2px 0px 0px 10px;"></textarea>
               <div style="clear:both;"></div>
@@ -338,12 +338,11 @@ spm_wf_field.data.push( {
 			// always use the first description value
 			$description = SPMUtils::getWikiValue( $descriptions[0] );
 		}
-		$hint1 = wfMsgWikiHtml( 'wf_spm_field_description', $description );
-		$hint2 = ( $multiple ? wfMsg( 'wf_spm_hint_field_multiple' ) : '' ) .
-//				( $optional ? wfMsg( 'wf_spm_hint_field_optional' ) : '' ) .
-				wfMsgWikiHtml( 'wf_spm_hint_field_description',
+		$hint1 = wfMessage( 'wf_spm_field_description', $description )->parse();
+		$hint2 = ( $multiple ? wfMessage( 'wf_spm_hint_field_multiple' )->text() : '' ) .
+				wfMessage( 'wf_spm_hint_field_description',
 					SMWDataValueFactory::findTypeLabel( $this->getSMWTypeID() ),
-					$this->getSampleWiki() );
+					$this->getSampleWiki() )->parse();
 
 		$sample = '';
 		foreach ( SPMArticleUtils::parseTemplatePage( $params['raw'] ) as $tf ) {

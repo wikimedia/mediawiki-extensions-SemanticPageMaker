@@ -16,9 +16,9 @@ function spm_om_ObjectModelAccess( $method, $params ) {
 	$p_array = explode( ",", $params );
 
 	if ( $method == "editObject" ) {
-		return wfMsg( 'spm_ajax_success' );
+		return wfMessage( 'spm_ajax_success' )->text();
 	}
 	else {
-		return wfMsg( 'spm_ajax_fail' );
+		return wfMessage( 'spm_ajax_fail' )->text();
 	}
 }

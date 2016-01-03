@@ -88,7 +88,7 @@ function wgSPMSetupExtension() {
 
 	smwfSPMInitMessages();
 	if ( !defined( 'WOM_VERSION' ) ) {
-		echo wfMsg( 'spm_error_nowom' );
+		echo wfMessage( 'spm_error_nowom' )->escaped();
 		die;
 	}
 

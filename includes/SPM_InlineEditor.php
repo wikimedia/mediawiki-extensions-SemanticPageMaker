@@ -48,7 +48,7 @@ class SPMInlineEditor {
 		$oldid = $article->getOldID() == 0 ? '' : 'oldid=' . $article->getOldID() . '&';
 		$main_action['wiedit'] = array(
 	        	'class' => ( $action == 'wiedit' ) ? 'selected' : false,
-	        	'text' => wfMsg( 'wiedit_tab' ), // Title of the tab
+	        	'text' => wfMessage( 'wiedit_tab' )->text(), // Title of the tab
 	        	'href' => $title->getLocalUrl( $oldid . 'action=wiedit' )   // where it links to
 		);
 
@@ -98,7 +98,7 @@ class SPMInlineEditor {
 				) :
 				array(
 		        'class' => false,
-		        'text' => ( $wgSPMRenameTab ? 'Edit' : wfMsg( 'wiedit_tab' ) ),
+		        'text' => ( $wgSPMRenameTab ? 'Edit' : wfMessage( 'wiedit_tab' )->text() ),
 		        'href' => $wgTitle->getLocalUrl( $oldid . 'action=wiedit' )   // where it links to
 				);
 		if ( $wgSPMRenameTab ) {

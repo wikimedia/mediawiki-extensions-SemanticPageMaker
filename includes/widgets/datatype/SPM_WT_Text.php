@@ -73,12 +73,11 @@ class SPMWidgetTextType extends SPMWidgetDataType {
 			// always use the first description value
 			$description = SPMUtils::getWikiValue( $descriptions[0] );
 		}
-		$hint1 = wfMsgWikiHtml( 'wf_spm_field_description', $description );
-		$hint2 = ( $multiple ? wfMsg( 'wf_spm_hint_field_multiple' ) : '' ) .
-//				( $optional ? wfMsg( 'wf_spm_hint_field_optional' ) : '' ) .
-				wfMsgWikiHtml( 'wf_spm_hint_field_description',
+		$hint1 = wfMessage( 'wf_spm_field_description', $description )->parse();
+		$hint2 = ( $multiple ? wfMessage( 'wf_spm_hint_field_multiple' )->text() : '' ) .
+				wfMessage( 'wf_spm_hint_field_description',
 					SMWDataValueFactory::findTypeLabel( $this->getSMWTypeID() ),
-					$this->getSampleWikiOnEmpty() );
+					$this->getSampleWikiOnEmpty() )->parse();
 
 		$sample = '';
 		foreach ( SPMArticleUtils::parseTemplatePage( $params['raw'] ) as $tf ) {

@@ -598,7 +598,7 @@ spm_wf_editor.extra['{$e->getTypeID()}'] = {
 		$wiki = '';
 		foreach ( $widgets as $w ) {
 			$tit = Title::newFromText( $w['category'], NS_CATEGORY_WIDGET );
-			$wiki .= wfMsg( 'wf_spm_parent', $tit->getFullURL( 'action=wfedit' ), $tit->getText() );
+			$wiki .= wfMessage( 'wf_spm_parent', $tit->getFullURL( 'action=wfedit' ), $tit->getText() )->text();
 			$wiki .= $this->loadWidget( $w['value'] );
 		}
 		return $wiki;
@@ -611,7 +611,6 @@ spm_wf_editor.extra['{$e->getTypeID()}'] = {
 			<div id="spm_wf_info">
 			<div id="spm_wf_info_msg"> </div>
 			</div>
-			' . /*wfMsg('wf_spm_current') .*/  '
 			<div id="spm_wf_main_container">
 			' . $this->loadParentWidgets( $widgets ) . '
 			<div id="spm_wf_main">
@@ -625,8 +624,7 @@ spm_wf_editor.extra['{$e->getTypeID()}'] = {
 			$link = Title::newFromText( $w['value'] );
 			$url = $link->getFullURL( 'action=edit' );
 
-//			$wiki .= wfMsg('wf_spm_src_template', $url);
-			$edit_direct = wfMsg( 'wf_spm_src_template', $url );
+			$edit_direct = wfMessage( 'wf_spm_src_template', $url )->text();
 
 			$wiki .= $this->loadWidget( $w['value'], true );
 
@@ -640,7 +638,7 @@ spm_wf_editor.extra['{$e->getTypeID()}'] = {
 		$wiki .= '
 			</div></div>';
 
-		$wiki .= wfMsg( 'wf_spm_freetext' );
+		$wiki .= wfMessage( 'wf_spm_freetext' )->text();
 
 
 		$wiki .= "__NOEDITSECTION____NOTOC__";
@@ -661,9 +659,9 @@ spm_wf_editor.js.$smwgIQRunningNumber=' . $smwgIQRunningNumber . ';
 		$this->addHTMLHeader();
 
 		global $wgOut;
-		$wgOut->addWikiText( wfMsg( 'wf_wd_hint_wfedit',
+		$wgOut->addWikiText( wfMesage( 'wf_wd_hint_wfedit',
 			Title::newFromText( $wgOut->getTitle()->getText(), NS_CATEGORY )
-		) );
+		)->text() );
 
 		$html = $this->getDesignerUI();
 

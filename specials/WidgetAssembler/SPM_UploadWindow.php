@@ -217,7 +217,7 @@ class UploadWindowForm {
 		unset( $this->mCurlDestHandle );
 		if ( $error ) {
 			unlink( $dest );
-			if ( Message::newFromKey( "upload-curl-error$errornum", wfMsg( "upload-curl-error$errornum" ) )->isDisabled() )
+			if ( Message::newFromKey( "upload-curl-error$errornum", wfMessage( "upload-curl-error$errornum" )->text() )->isDisabled() )
 				$wgOut->errorPage( 'upload-misc-error', 'upload-misc-error-text' );
 			else
 				$wgOut->errorPage( "upload-curl-error$errornum", "upload-curl-error$errornum-text" );
@@ -309,7 +309,7 @@ class UploadWindowForm {
 
 		/* Check for PHP error if any, requires php 4.2 or newer */
 		if ( $this->mCurlError == 1/*UPLOAD_ERR_INI_SIZE*/ ) {
-			$this->mainUploadWindowForm( wfMsgHtml( 'largefileserver' ) );
+			$this->mainUploadWindowForm( wfMessage( 'largefileserver' )->escaped() );
 			return;
 		}
 
@@ -317,7 +317,7 @@ class UploadWindowForm {
 		 * If there was no filename or a zero size given, give up quick.
 		 */
 		if ( trim( $this->mSrcName ) == '' || empty( $this->mFileSize ) ) {
-			$this->mainUploadWindowForm( wfMsgHtml( 'emptyfile' ) );
+			$this->mainUploadWindowForm( wfMessage( 'emptyfile' )->escaped() );
 			return;
 		}
 
@@ -349,7 +349,7 @@ class UploadWindowForm {
 		}
 
 		if ( strlen( $partname ) < 1 ) {
-			$this->mainUploadWindowForm( wfMsgHtml( 'minlength1' ) );
+			$this->mainUploadWindowForm( wfMessage( 'minlength1' )->escaped() );
 			return;
 		}
 
@@ -360,7 +360,7 @@ class UploadWindowForm {
 		$filtered = wfStripIllegalFilenameChars ( $filtered );
 		$nt = Title::makeTitleSafe( NS_IMAGE, $filtered );
 		if ( is_null( $nt ) ) {
-			$this->uploadError( wfMsgWikiHtml( 'illegalfilename', htmlspecialchars( $filtered ) ) );
+			$this->uploadError( wfMessage( 'illegalfilename', $filtered )->escaped() );
 			return;
 		}
 		$this->mLocalFile = wfLocalFile( $nt );
@@ -371,7 +371,7 @@ class UploadWindowForm {
 		 * to modify it by uploading a new revision.
 		 */
 		if ( !$nt->userCan( 'edit' ) ) {
-			return $this->uploadError( wfMsgWikiHtml( 'protectedpage' ) );
+			return $this->uploadError( wfMessage( 'protectedpage' )->escaped() );
 		}
 
 		/**
@@ -387,11 +387,11 @@ class UploadWindowForm {
 		global $wgStrictFileExtensions;
 		global $wgFileExtensions, $wgFileBlacklist;
 		if ( $finalExt == '' ) {
-			return $this->uploadError( wfMsgExt( 'filetype-missing', array ( 'parseinline' ) ) );
+			return $this->uploadError( wfMessage( 'filetype-missing' )->parse() );
 		} elseif ( $this->checkFileExtensionList( $ext, $wgFileBlacklist ) ||
 				( $wgStrictFileExtensions && !$this->checkFileExtension( $finalExt, $wgFileExtensions ) ) ) {
-			return $this->uploadError( wfMsgExt( 'filetype-badtype', array ( 'parseinline' ),
-				htmlspecialchars( $finalExt ), implode ( ', ', $wgFileExtensions ) ) );
+			return $this->uploadError( wfMessage( 'filetype-badtype',
+				htmlspecialchars( $finalExt ), implode ( ', ', $wgFileExtensions ) )->parse() );
 		}
 
 		/**
@@ -430,14 +430,14 @@ class UploadWindowForm {
 				$filtered = ucfirst( $filtered );
 			}
 			if ( $basename != $filtered ) {
-				$warning .=  '<li>' . wfMsgHtml( 'badfilename', htmlspecialchars( $this->mDestName ) ) . '</li>';
+				$warning .=  '<li>' . wfMessage( 'badfilename', htmlspecialchars( $this->mDestName ) )->escaped() . '</li>';
 			}
 
 			global $wgCheckFileExtensions;
 			if ( $wgCheckFileExtensions ) {
 				if ( ! $this->checkFileExtension( $finalExt, $wgFileExtensions ) ) {
-					$warning .= '<li>' . wfMsgExt( 'filetype-badtype', array ( 'parseinline' ),
-						htmlspecialchars( $finalExt ), implode ( ', ', $wgFileExtensions ) ) . '</li>';
+					$warning .= '<li>' . wfMessage( 'filetype-badtype',
+						htmlspecialchars( $finalExt ), implode ( ', ', $wgFileExtensions ) )->parse() . '</li>';
 				}
 			}
 
@@ -445,10 +445,10 @@ class UploadWindowForm {
 			if ( $wgUploadSizeWarning && ( $this->mFileSize > $wgUploadSizeWarning ) ) {
 				$wsize =Linker::formatSize( $wgUploadSizeWarning );
 				$asize = Linker::formatSize( $this->mFileSize );
-				$warning .= '<li>' . wfMsgHtml( 'large-file', $wsize, $asize ) . '</li>';
+				$warning .= '<li>' . wfMessage( 'large-file', $wsize, $asize )->escaped() . '</li>';
 			}
 			if ( $this->mFileSize == 0 ) {
-				$warning .= '<li>' . wfMsgHtml( 'emptyfile' ) . '</li>';
+				$warning .= '<li>' . wfMessage( 'emptyfile' )->escaped() . '</li>';
 			}
 
 			if ( !$this->mDestWarningAck ) {
@@ -566,7 +566,7 @@ END;
 				array( 'known' )
 			);
 			if ( $file->allowInlineDisplay() ) {
-				$dlink2 = Linker::makeImageLinkObj( $file->getTitle(), wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
+				$dlink2 = Linker::makeImageLinkObj( $file->getTitle(), wfMessage( 'fileexists-thumb', $dlink )->parse(),
 					$file->getName(), 'right', array(), false, true );
 			} elseif ( !$file->allowInlineDisplay() && $file->isSafeFile() ) {
 				$icon = $file->iconThumb();
@@ -576,7 +576,7 @@ END;
 				$dlink2 = '';
 			}
 
-			$warning .= '<li>' . wfMsgExt( 'fileexists', 'parseinline', $dlink ) . '</li>' . $dlink2;
+			$warning .= '<li>' . wfMessage( 'fileexists', $dlink )->parse() . '</li>' . $dlink2;
 
 		} elseif ( $file_lc && $file_lc->exists() ) {
 			# Check if image with lowercase extension exists.
@@ -589,7 +589,7 @@ END;
 				array( 'known' )
 			);
 			if ( $file_lc->allowInlineDisplay() ) {
-				$dlink2 = Linker::makeImageLinkObj( $nt_lc, wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
+				$dlink2 = Linker::makeImageLinkObj( $nt_lc, wfMessage( 'fileexists-thumb', $dlink )->parse(),
 					$nt_lc->getText(), 'right', array(), false, true );
 			} elseif ( !$file_lc->allowInlineDisplay() && $file_lc->isSafeFile() ) {
 				$icon = $file_lc->iconThumb();
@@ -599,7 +599,7 @@ END;
 				$dlink2 = '';
 			}
 
-			$warning .= '<li>' . wfMsgExt( 'fileexists-extension', 'parsemag', $file->getName(), $dlink ) . '</li>' . $dlink2;
+			$warning .= '<li>' . wfMessage( 'fileexists-extension', $file->getName(), $dlink )->parse() . '</li>' . $dlink2;
 
 		} elseif ( ( substr( $partname , 3, 3 ) == 'px-' || substr( $partname , 2, 3 ) == 'px-' )
 			&& ereg( "[0-9]{2}" , substr( $partname , 0, 2 ) ) )
@@ -618,7 +618,7 @@ END;
 				);
 				if ( $file_thb->allowInlineDisplay() ) {
 					$dlink2 = $sk->makeImageLinkObj( $nt_thb,
-						wfMsgExt( 'fileexists-thumb', 'parseinline', $dlink ),
+						wfMessage( 'fileexists-thumb', $dlink )->parse(),
 						$nt_thb->getText(), 'right', array(), false, true );
 				} elseif ( !$file_thb->allowInlineDisplay() && $file_thb->isSafeFile() ) {
 					$icon = $file_thb->iconThumb();
@@ -629,12 +629,12 @@ END;
 					$dlink2 = '';
 				}
 
-				$warning .= '<li>' . wfMsgExt( 'fileexists-thumbnail-yes', 'parsemag', $dlink ) .
+				$warning .= '<li>' . wfMessage( 'fileexists-thumbnail-yes', $dlink )->parse() .
 					'</li>' . $dlink2;
 			} else {
 				# Image w/o '180px-' does not exists, but we do not like these filenames
-				$warning .= '<li>' . wfMsgExt( 'file-thumbnail-no', 'parseinline' ,
-					substr( $partname , 0, strpos( $partname , '-' ) + 1 ) ) . '</li>';
+				$warning .= '<li>' . wfMesage( 'file-thumbnail-no' ,
+					substr( $partname , 0, strpos( $partname , '-' ) + 1 ) )->parse() . '</li>';
 			}
 		}
 		if ( $file->wasDeleted() ) {
@@ -643,12 +643,12 @@ END;
 			$ltitle = SpecialPage::getTitleFor( 'Log' );
 			$llink = Linker::link(
 				$ltitle,
-				wfMsgHtml( 'sf_deletionlog' ),
+				wfMessage( 'sf_deletionlog' )->escaped(),
 				array(),
 				array( 'type' => 'delete', 'page' => $file->getTitle()->getPrefixedUrl() ),
 				array( 'known' )
 			);
-			$warning .= '<li>' . wfMsgWikiHtml( 'filewasdeleted', $llink ) . '</li>';
+			$warning .= '<li>' . wfMessage( 'filewasdeleted', $llink )->escaped() . '</li>';
 		}
 		return $warning;
 	}
@@ -766,7 +766,7 @@ END;
 	 */
 	function uploadError( $error ) {
 		global $wgOut;
-		$wgOut->addHTML( "<h2>" . wfMsgHtml( 'uploadwarning' ) . "</h2>\n" );
+		$wgOut->addHTML( "<h2>" . wfMessage( 'uploadwarning' )->escaped() . "</h2>\n" );
 		$wgOut->addHTML( "<span class='error'>{$error}</span>\n" );
 	}
 
@@ -788,13 +788,13 @@ END;
 			return;
 		}
 
-		$wgOut->addHTML( "<h2>" . wfMsgHtml( 'uploadwarning' ) . "</h2>\n" );
+		$wgOut->addHTML( "<h2>" . wfMessage( 'uploadwarning' )->escaped() . "</h2>\n" );
 		$wgOut->addHTML( "<ul class='warning'>{$warning}</ul><br />\n" );
 
-		$save = wfMsgHtml( 'savefile' );
-		$reupload = wfMsgHtml( 'reupload' );
-		$iw = wfMsgWikiHtml( 'ignorewarning' );
-		$reup = wfMsgWikiHtml( 'reuploaddesc' );
+		$save = wfMessage( 'savefile' )->escaped();
+		$reupload = wfMessage( 'reupload' )->escaped();
+		$iw = wfMessage( 'ignorewarning' )->parse();
+		$reup = wfMessage( 'reuploaddesc' )>parse();
 		$titleObj = SpecialPage::getTitleFor( 'Upload' );
 		$action = htmlspecialchars( $titleObj->getLocalURL( 'action=submit' ) );
 		$align1 = $wgContLang->isRTL() ? 'left' : 'right';
@@ -874,17 +874,18 @@ wgAjaxLicensePreview = {$alp};
 		if ( $this->mDesiredDestName && $wgUser->isAllowed( 'deletedhistory' ) ) {
 			$title = Title::makeTitleSafe( NS_IMAGE, $this->mDesiredDestName );
 			if ( $title instanceof Title && ( $count = $title->isDeleted() ) > 0 ) {
-				$link = wfMsgExt(
-					$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted',
-					array( 'parse', 'replaceafter' ),
-					Linker::link(
+				$link = wfMessage(
+					$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted'
+				)
+				->rawParams( Linker::link(
 						SpecialPage::getTitleFor( 'Undelete', SPMWidgetUtils::getTitlePrefixedText( $title ) ),
-						wfMsgHtml( 'restorelink', $count ),
+						wfMessage( 'restorelink', $count )->escaped(),
 						array(),
 						array(),
 						array( 'known' )
 					)
-				);
+				)
+				->parse();
 				$wgOut->addHTML( "<div id=\"contentSub2\">{$link}</div>" );
 			}
 		}
@@ -896,22 +897,21 @@ wgAjaxLicensePreview = {$alp};
 		else $ew = '';
 
 		if ( '' != $msg ) {
-			$sub = wfMsgHtml( 'uploaderror' );
+			$sub = wfMessage( 'uploaderror' )->escaped();
 			$wgOut->addHTML( "<h2>{$sub}</h2>\n" .
 			  "<span class='error'>{$msg}</span>\n" );
 		}
 		// the 'uploadtext' message is not displayed in this window,
 		// because most of it is irrelevant to a form-based upload
 		// $wgOut->addHTML( '<div id="uploadtext">' );
-		// $wgOut->addWikiText( wfMsgNoTrans( 'uploadtext', $this->mDesiredDestName ) );
 		// $wgOut->addHTML( '</div>' );
 
-		$sourcefilename = wfMsgHtml( 'sourcefilename' );
-		$destfilename = wfMsgHtml( 'destfilename' );
-		$summary = wfMsgExt( 'fileuploadsummary', 'parseinline' );
+		$sourcefilename = wfMessage( 'sourcefilename' )->escaped();
+		$destfilename = wfMessage( 'destfilename' )->escaped();
+		$summary = wfMessage( 'fileuploadsummary' )->parse();
 
-		$license = wfMsgExt( 'license', array( 'parseinline' ) );
-		$nolicense = wfMsgHtml( 'nolicense' );
+		$license = wfMessage( 'license' )->parse();
+		$nolicense = wfMessage( 'nolicense' )->escaped();
 		// class changed in MW 1.16
 		/*
 		if (method_exists('Licenses', 'getInputHtml')) {
@@ -924,7 +924,7 @@ wgAjaxLicensePreview = {$alp};
 		*/
 		$licenseshtml = '';
 
-		$ulb = wfMsgHtml( 'uploadbtn' );
+		$ulb = wfMessage( 'uploadbtn' )->escaped();
 
 
 		$titleObj = SpecialPage::getTitleFor( 'UploadWindow' );
@@ -949,7 +949,7 @@ wgAjaxLicensePreview = {$alp};
 				     "toggle_element_activation(\"wpUploadFileURL\",\"wpUploadFile\");" .
 				     "toggle_element_check(\"wpSourceTypeFile\",\"wpSourceTypeURL\")'" .
 				( $this->mDesiredDestName ? "":"onchange='fillDestFilename(\"wpUploadFile\")' " ) . "size='40' />" .
-				wfMsgHTML( 'upload_source_file' ) . "<br />" .
+				wfMessage( 'upload_source_file' )->escaped() . "<br />" .
 				"<input type='radio' id='wpSourceTypeURL' name='wpSourceType' value='web' " .
 				  "onchange='toggle_element_activation(\"wpUploadFile\",\"wpUploadFileURL\")' />" .
 				"<input tabindex='1' type='text' name='wpUploadFileURL' id='wpUploadFileURL' " .
@@ -957,7 +957,7 @@ wgAjaxLicensePreview = {$alp};
 				    "toggle_element_activation(\"wpUploadFile\",\"wpUploadFileURL\");" .
 				    "toggle_element_check(\"wpSourceTypeURL\",\"wpSourceTypeFile\")'" .
 				( $this->mDesiredDestName ? "":"onchange='fillDestFilename(\"wpUploadFileURL\")' " ) . "size='40' DISABLED />" .
-				wfMsgHtml( 'upload_source_url' ) ;
+				wfMessage( 'upload_source_url' )->escaped() ;
 		} else {
 			$filename_form =
 				"<input tabindex='1' type='file' name='wpUploadFile' id='wpUploadFile' " .
@@ -1029,9 +1029,9 @@ EOT
 		}
 
 		if ( $wgUseCopyrightUpload ) {
-			$filestatus = wfMsgHtml ( 'filestatus' );
+			$filestatus = wfMessage( 'filestatus' )->escaped();
 			$copystatus =  htmlspecialchars( $this->mCopyrightStatus );
-			$filesource = wfMsgHtml ( 'filesource' );
+			$filesource = wfMessage ( 'filesource' )->escaped();
 			$uploadsource = htmlspecialchars( $this->mCopyrightSource );
 
 			$wgOut->addHTML( "
@@ -1052,9 +1052,9 @@ EOT
 		<td></td>
 		<td>
 			<input tabindex='7' type='checkbox' name='wpWatchthis' id='wpWatchthis' $watchChecked value='true' />
-			<label for='wpWatchthis'>" . wfMsgHtml( 'watchthisupload' ) . "</label>
+			<label for='wpWatchthis'>" . wfMessage( 'watchthisupload' )->escaped() . "</label>
 			<input tabindex='8' type='checkbox' name='wpIgnoreWarning' id='wpIgnoreWarning' value='true' $warningChecked/>
-			<label for='wpIgnoreWarning'>" . wfMsgHtml( 'ignorewarnings' ) . "</label>
+			<label for='wpIgnoreWarning'>" . wfMessage( 'ignorewarnings' )->escaped() . "</label>
 		</td>
 	</tr>
 	$warningRow
@@ -1066,7 +1066,7 @@ EOT
 		<td></td>
 		<td align='$align2'>
 		" );
-		$wgOut->addWikiText( wfMsgForContent( 'edittools' ) );
+		$wgOut->addWikiText( wfMessage( 'edittools' )->inContentLanguage()->parse() );
 		$wgOut->addHTML( "
 		</td>
 	</tr>
@@ -1509,7 +1509,7 @@ EOT
 	 */
 	function showError( $description ) {
 		global $wgOut;
-		$wgOut->setPageTitle( wfMsg( "internalerror" ) );
+		$wgOut->setPageTitle( wfMessage( "internalerror" ) );
 		$wgOut->setRobotPolicy( "noindex,nofollow" );
 		$wgOut->setArticleRelated( false );
 		$wgOut->enableClientCache( false );
@@ -1523,17 +1523,17 @@ EOT
 		global $wgUseCopyrightUpload;
 		if ( $wgUseCopyrightUpload ) {
 			if ( $license != '' ) {
-				$licensetxt = '== ' . wfMsgForContent( 'license' ) . " ==\n" . '{{' . $license . '}}' . "\n";
+				$licensetxt = '== ' . wfMessage( 'license' )->inContentLanguage()->text() . " ==\n" . '{{' . $license . '}}' . "\n";
 			}
-			$pageText = '== ' . wfMsg ( 'filedesc' ) . " ==\n" . $comment . "\n" .
-			  '== ' . wfMsgForContent ( 'filestatus' ) . " ==\n" . $copyStatus . "\n" .
+			$pageText = '== ' . wfMessage ( 'filedesc' )->text() . " ==\n" . $comment . "\n" .
+			  '== ' . wfMessage ( 'filestatus' )->inContentLanguage()->text() . " ==\n" . $copyStatus . "\n" .
 			  "$licensetxt" .
-			  '== ' . wfMsgForContent ( 'filesource' ) . " ==\n" . $source ;
+			  '== ' . wfMessage ( 'filesource' )->inContentLanguage()->text() . " ==\n" . $source ;
 		} else {
 			if ( $license != '' ) {
-				$filedesc = $comment == '' ? '' : '== ' . wfMsg ( 'filedesc' ) . " ==\n" . $comment . "\n";
+				$filedesc = $comment == '' ? '' : '== ' . wfMessage ( 'filedesc' )->text() . " ==\n" . $comment . "\n";
 				 $pageText = $filedesc .
-					 '== ' . wfMsgForContent ( 'license' ) . " ==\n" . '{{' . $license . '}}' . "\n";
+					 '== ' . wfMessage ( 'license' )->inContentLanguage()->text() . " ==\n" . '{{' . $license . '}}' . "\n";
 			} else {
 				$pageText = $comment;
 			}

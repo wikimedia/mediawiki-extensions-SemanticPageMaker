@@ -234,12 +234,7 @@ class SPMWidgetWidgetType extends SPMWidgetDataType {
 '" type="hidden" value="' . str_replace( '"', '\"', str_replace( "\n", ' ', $current_value ) ) . '"/>';
 		}
 
-		$hint1 = wfMsgWikiHtml( 'wf_spm_field_description', '' );
-//		$hint2 = ( $multiple ? wfMsg( 'wf_spm_hint_field_multiple' ) : '' ) .
-////				( $optional ? wfMsg( 'wf_spm_hint_field_optional' ) : '' ) .
-//				wfMsgWikiHtml('wf_spm_hint_field_description',
-//					SMWDataValueFactory::findTypeLabel($this->getSMWTypeID()),
-//					$this->getSampleWikiOnEmpty());
+		$hint1 = wfMessage( 'wf_spm_field_description', '' )->parse();
 
 		global $wgSPMScriptPath, $wgOut;
 		return '
@@ -270,7 +265,7 @@ class SPMWidgetWidgetType extends SPMWidgetDataType {
 			Title $proptitle,
 			$extra_semdata = null, $params = array(), $ajax = false ) {
 
-		if ( $title == null ) return wfMsg( 'wf_spm_err_not_support' );
+		if ( $title == null ) return wfMessage( 'wf_spm_err_not_support' )->text();
 
 		$widget = '';
 		$store = smwfGetStore();
@@ -283,7 +278,7 @@ class SPMWidgetWidgetType extends SPMWidgetDataType {
 			$widget = SPMUtils::getWikiValue( $widgets[0] );
 		}
 		if ( $widget == '' ) return '
-<span class="small" style="width:450px;">' . wfMsgWikiHtml( 'wf_spm_err_widget_not_defined', $proptitle ) . '</span>';
+<span class="small" style="width:450px;">' . wfMessage( 'wf_spm_err_widget_not_defined', $proptitle )->parse() . '</span>';
 
 		$name = str_replace( '"', '\"', "{$tmpl_name}[0][{$field_name}]" );
 

@@ -28,7 +28,7 @@ class SPMWidgetAssembler extends SpecialPage {
 		$params = $wgRequest->getVal( 'params' );
 
 		if ( $page_name == null || $widget_name == null ) {
-			$wgOut->setPageTitle( wfMsg( 'wf_editor' ) );
+			$wgOut->setPageTitle( wfMessage( 'wf_editor' ) );
 
 			$help = 'Usage: ?spm_w=<widget name>&spm_t=<page title>';
 
@@ -84,7 +84,7 @@ class SPMWidgetAssembler extends SpecialPage {
 <div align="center">';
 
 		$html .= '
-<h2>' . wfMsgWikiHtml( 'wf_title', $page_name ) . '</h2>
+<h2>' . wfMessage( 'wf_title', $page_name )->parse() . '</h2>
 ' . SPMWidgetUtils::getWidgetAssemblerHtml( $widget_name, $wom, $t_vals );
 
 		$html .= '

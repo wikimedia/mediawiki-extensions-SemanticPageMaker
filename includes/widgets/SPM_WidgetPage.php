@@ -115,7 +115,7 @@ class CategoryWidgetViewer {
 
 	function getNewWidgetUI() {
 		$category = $this->title->getText();
-		return wfMsg( 'wf_spm_create_widget', Title::newFromText( $category, NS_CATEGORY_WIDGET )->getFullURL( 'action=wfedit' ) );
+		return wfMessage( 'wf_spm_create_widget', Title::newFromText( $category, NS_CATEGORY_WIDGET )->getFullURL( 'action=wfedit' ) )->text();
 	}
 
 	function getTemplatePrototype( $text ) {
@@ -286,11 +286,11 @@ class CategoryWidgetViewer {
 		$url = $this->getTitle()->getFullURL( 'action=wcedit' );
 
 		$html .= '
-<h1>' . wfMsg( 'wf_spm_preview' ) . '</h1>
+<h1>' . wfMessage( 'wf_spm_preview' )->escaped() . '</h1>
 <div id="spm_wf_main_container">
 ' . $this->loadWidgetView() . '
 </div>
-<h1>' . wfMsg( 'wf_spm_connector' ) . wfMsg( 'wf_spm_connector_edit', $url ) . '</h1>
+<h1>' . wfMessage( 'wf_spm_connector' )->escaped() . wfMessage( 'wf_spm_connector_edit', $url )->escaped() . '</h1>
 ' . $this->loadFieldConnectors() . '
 ';
 

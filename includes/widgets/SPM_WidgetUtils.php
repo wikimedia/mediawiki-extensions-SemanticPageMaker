@@ -33,7 +33,7 @@ class SPMWidgetUtils {
 				}
 				$links['namespaces']['nstab-category_widget'] = array(
 					'class' => implode( ' ', $classes ),
-					'text' => wfMsg( 'nstab-category_widget' ),
+					'text' => wfMessage( 'nstab-category_widget' )->text(),
 					'href' => $title->getLocalUrl( $query )
 				);
 			} else if ( $obj->mTitle->getNamespace() == NS_CATEGORY_WIDGET ) {
@@ -43,13 +43,13 @@ class SPMWidgetUtils {
 					$edit_tab_location = array_search( 'edit', array_keys( $content_actions ) );
 					$wfedit_action['wfedit'] = array(
 						'class' => ( $wgRequest->getVal( 'action' ) == 'wfedit' ) ? 'selected' : '',
-						'text' => wfMsg( 'wfedit_tab' ),
+						'text' => wfMessage( 'wfedit_tab' )->text(),
 						'href' => preg_replace( '/\baction=edit\b/', 'action=wfedit', $content_actions['edit']['href'] )
 					);
 					if ( $wgSPMShowConnectorEditTab ) {
 						$wfedit_action['wcedit'] = array(
 							'class' => ( $wgRequest->getVal( 'action' ) == 'wcedit' ) ? 'selected' : '',
-							'text' => wfMsg( 'wcedit_tab' ),
+							'text' => wfMessage( 'wcedit_tab' )->text(),
 							'href' => preg_replace( '/\baction=edit\b/', 'action=wcedit', $content_actions['edit']['href'] )
 						);
 					}
@@ -80,7 +80,7 @@ class SPMWidgetUtils {
 				}
 				$links['namespaces']['nstab-category'] = array(
 					'class' => implode( ' ', $classes ),
-					'text' => wfMsg( 'nstab-category' ),
+					'text' => wfMessage( 'nstab-category' )->text(),
 					'href' => $title->getLocalUrl( $query )
 				);
 
@@ -118,7 +118,7 @@ class SPMWidgetUtils {
 				}
 				$main_action['nstab-category_widget'] = array(
 					'class' => implode( ' ', $classes ),
-					'text' => wfMsg( 'nstab-category_widget' ),
+					'text' => wfMessage( 'nstab-category_widget' )->text(),
 					'href' => $title->getLocalUrl( $query )
 				);
 			} else if ( $obj->mTitle->getNamespace() == NS_CATEGORY_WIDGET ) {
@@ -127,13 +127,13 @@ class SPMWidgetUtils {
 					$edit_tab_location = array_search( 'edit', array_keys( $content_actions ) );
 					$wfedit_action['wfedit'] = array(
 						'class' => ( $wgRequest->getVal( 'action' ) == 'wfedit' ) ? 'selected' : '',
-						'text' => wfMsg( 'wfedit_tab' ),
+						'text' => wfMessage( 'wfedit_tab' )->text(),
 						'href' => preg_replace( '/\baction=edit\b/', 'action=wfedit', $content_actions['edit']['href'] )
 					);
 					if ( $wgSPMShowConnectorEditTab ) {
 						$wfedit_action['wcedit'] = array(
 							'class' => ( $wgRequest->getVal( 'action' ) == 'wcedit' ) ? 'selected' : '',
-							'text' => wfMsg( 'wcedit_tab' ),
+							'text' => wfMessage( 'wcedit_tab' )->text(),
 							'href' => preg_replace( '/\baction=edit\b/', 'action=wcedit', $content_actions['edit']['href'] )
 						);
 					}
@@ -164,7 +164,7 @@ class SPMWidgetUtils {
 				}
 				$main_action['nstab-category'] = array(
 					'class' => implode( ' ', $classes ),
-					'text' => wfMsg( 'nstab-category' ),
+					'text' => wfMessage( 'nstab-category' )->text(),
 					'href' => $title->getLocalUrl( $query )
 				);
 			} else {
@@ -290,7 +290,7 @@ class SPMWidgetUtils {
 
 	static function addWFInput( $categoryPage ) {
 		global $wgOut;
-		$wgOut->addWikiText( wfMsg( 'wf_spm_hint_wfinput' ) );
+		$wgOut->addWikiText( wfMessage( 'wf_spm_hint_wfinput' )->text() );
 		$wgOut->addWikiText( "{{#wfinput:{$categoryPage->getTitle()->getText()}|}}" );
 
 		return true;
@@ -298,7 +298,7 @@ class SPMWidgetUtils {
 
 	static function onWidgetMove( $title, $new_title, $user, &$err, $reason ) {
 		if ( $title->getNamespace() == NS_CATEGORY_WIDGET ) {
-			$err = wfMsg( 'immobile-source-namespace', $title->getNsText() );
+			$err = wfMessage( 'immobile-source-namespace', $title->getNsText() )->text();
 			return false;
 		}
 
@@ -984,13 +984,13 @@ class SPMWidgetUtils {
 		foreach ( $connectorExpressions as $exp ) {
 			$src_html = '';
 			foreach ( $exp['src'] as $src ) {
-				$src_html .= wfMsg( 'wf_wc_html_exp_src', $src );
+				$src_html .= wfMessage( 'wf_wc_html_exp_src', $src )->escaped();
 			}
 
-			$conn_html .= wfMsg( 'wf_wc_html_exp',
+			$conn_html .= wfMessage( 'wf_wc_html_exp',
 				$exp['target'],
 				str_replace( "\n", "<br/>\n", $exp['exp'] ),
-				$src_html );
+				$src_html )->escaped();
 		}
 
 		return $conn_html;

@@ -31,7 +31,7 @@ class SPMObjectEditor extends SpecialPage {
 			$q_arr = explode( '/', $query, 3 );
 
 			if ( count( $q_arr ) != 3 ) {
-				$wgOut->setPageTitle( wfMsg( 'spm_editor' ) );
+				$wgOut->setPageTitle( wfMessage( 'spm_editor' ) );
 
 				$help = 'Usage: <page revision id>/<WOM id>/<page title>';
 

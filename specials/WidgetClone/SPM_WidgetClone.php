@@ -32,7 +32,7 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 			$q_arr = explode( '/', $query, 4 );
 
 			if ( count( $q_arr ) < 1 ) {
-				$wgOut->setPageTitle( wfMsg( 'spm_clone' ) );
+				$wgOut->setPageTitle( wfMessage( 'spm_clone' ) );
 
 				$help = 'Usage: <source category name>/<target category name>/<parent category name>/<include actions ? 1:0>';
 
