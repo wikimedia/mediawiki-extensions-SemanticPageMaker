@@ -142,7 +142,7 @@ class SPMTemplateModel extends SPMObjectModelCollection {
 		$widget = $this->getWidgetSettings( $page_obj, $name );
 		if ( $widget != null ) {
 			return '
-<h2>' . wfMsgWikiHtml( 'wf_title', $widget->getText() ) . '</h2>
+<h2>' . wfMessage( 'wf_title', $widget->getText() )->escaped() . '</h2>
 ' . SPMWidgetUtils::getWidgetAssemblerHtml( $widget->getText(), $page_obj );
 		}
 
