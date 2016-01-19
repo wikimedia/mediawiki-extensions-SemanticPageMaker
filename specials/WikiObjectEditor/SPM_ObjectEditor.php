@@ -17,6 +17,11 @@ class SPMObjectEditor extends SpecialPage {
 	public function __construct() {
 		parent::__construct( 'ObjectEditor' );
 	}
+
+	public function doesWrites() {
+		return true;
+	}
+
 	/*
 	 * Overloaded function that is responsible for the creation of the Special Page
 	 */
