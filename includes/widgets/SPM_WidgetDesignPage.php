@@ -659,7 +659,7 @@ spm_wf_editor.js.$smwgIQRunningNumber=' . $smwgIQRunningNumber . ';
 		$this->addHTMLHeader();
 
 		global $wgOut;
-		$wgOut->addWikiText( wfMesage( 'wf_wd_hint_wfedit',
+		$wgOut->addWikiText( wfMessage( 'wf_wd_hint_wfedit',
 			Title::newFromText( $wgOut->getTitle()->getText(), NS_CATEGORY )
 		)->text() );
 

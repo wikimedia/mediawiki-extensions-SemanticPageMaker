@@ -633,7 +633,7 @@ END;
 					'</li>' . $dlink2;
 			} else {
 				# Image w/o '180px-' does not exists, but we do not like these filenames
-				$warning .= '<li>' . wfMesage( 'file-thumbnail-no' ,
+				$warning .= '<li>' . wfMessage( 'file-thumbnail-no' ,
 					substr( $partname , 0, strpos( $partname , '-' ) + 1 ) )->parse() . '</li>';
 			}
 		}
