@@ -141,8 +141,11 @@ class SPMWidgetAssembler extends SpecialPage {
 <div align="center"> Saving ... </div>
 ';
 		// save to wiki
-		$article = new Article( $page_obj->getTitle() );
-		$article->doEdit( $page_obj->getWikiText(), '' );
+		$page = WikiPage::factory( $page_obj->getTitle() );
+		$page->doEditContent(
+			ContentHandler::makeContent( $page_obj->getWikiText(), $page_obj->getTitle() ),
+			''
+		);
 
 		print '
 <script type="text/javascript">

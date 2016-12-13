@@ -1021,8 +1021,11 @@ class SPMWidgetUtils {
 		}
 		$wom->appendChildObject( new WOMTextModel( $pf_text ) );
 
-		$article = new Article( $title );
-		$ret = $article->doEdit( $wom->getWikiText(), 'Edit by Widget Connector Designer' );
+		$page = WikiPage::factory( $title );
+		$ret = $page->doEditContent(
+			ContentHandler::makeContent( $wom->getWikiText(), $title ),
+			'Edit by Widget Connector Designer'
+		);
 		if ( !$ret->isOK() ) {
 			return $ret->getWikiText();
 		}

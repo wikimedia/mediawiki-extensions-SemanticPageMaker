@@ -109,8 +109,11 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 		// save to wiki
 		$content = "'''Created by Semantic Page Maker.'''\n" . ( $parent ? "[[Category:{$parent}]]" : '' );
 		$c_title = Title::newFromText( $targetWidget, NS_CATEGORY );
-		$article = new Article( $c_title );
-		$article->doEdit( $content, $summary );
+		$page = WikiPage::factory( $c_title );
+		$page->doEditContent(
+			ContentHandler::makeContent( $content, $c_title ),
+			$summary
+		);
 
 		$content = '';
 		$t_title = Title::newFromText( $targetWidget, NS_TEMPLATE );
@@ -158,8 +161,11 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 							$ps = explode( '/', $prop_name, 2 );
 							$new_prop_name = $targetWidget . '/' . $ps[1];
 							$p_title = Title::newFromText( $new_prop_name, SMW_NS_PROPERTY );
-							$article = new Article( $p_title );
-							$article->doEdit( $p_content, $summary );
+							$page = WikiPage::factory( $p_title );
+							$page->doEditContent(
+								ContentHandler::makeContent( $p_content, $p_title ),
+								$summary
+							);
 
 							$tmpl['fields'][1] = $new_prop_name;
 						}
@@ -168,8 +174,11 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 				}
 			}
 		}
-		$article = new Article( $t_title );
-		$article->doEdit( $content, $summary );
+		$page = WikiPage::factory( $t_title );
+		$page->doEditContent(
+			ContentHandler::makeContent( $content, $t_title ),
+			$summary
+		);
 
 		$smwdatatype = SMWPropertyValue::makeProperty( '___SPM_WF_ST' );
 		$content = "[[{$smwdatatype->getWikiValue()}::" . SPMWidgetUtils::getTitlePrefixedText( $t_title ) . "| ]]\n";
@@ -186,8 +195,11 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 			}
 		}
 		$w_title = Title::newFromText( $targetWidget, NS_CATEGORY_WIDGET );
-		$article = new Article( $w_title );
-		$article->doEdit( $content, $summary );
+		$page = WikiPage::factory( $w_title );
+		$page->doEditContent(
+			ContentHandler::makeContent( $content, $w_title ),
+			$summary
+		);
 
 		print '
 <script type="text/javascript">

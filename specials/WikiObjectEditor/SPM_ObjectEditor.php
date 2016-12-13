@@ -112,8 +112,13 @@ class SPMObjectEditor extends SpecialPage {
 <div align="center"> Saving ... </div>
 ';
 		// save to wiki
-		$article = new Article( $wom->getTitle() );
-		$article->doEdit( $wom->getWikiText(), '', 0, $rid );
+		$page = WikiPage::factory( $wom->getTitle() );
+		$page->doEditContent(
+			ContentHandler::makeContent( $wom->getWikiText(), $wom->getTitle() ),
+			'',
+			0,
+			$rid
+		);
 
 		print '
 <script type="text/javascript">

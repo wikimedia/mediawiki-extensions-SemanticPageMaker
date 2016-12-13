@@ -143,8 +143,11 @@ function spm_wf_EditorAccess( $method ) {
 		$text = $dt->getPropertyWiki( $params );
 
 		$title = Title::newFromText( $title . '/' . $name, SMW_NS_PROPERTY );
-		$article = new Article( $title );
-		$ret = $article->doEdit( $text, 'Edit by Widget Designer' );
+		$page = WikiPage::factory( $title );
+		$ret = $page->doEditContent(
+			ContentHandler::makeContent( $text, $title ),
+			'Edit by Widget Designer'
+		);
 
 		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "resetPropertyDefinition" ) {
@@ -172,8 +175,13 @@ function spm_wf_EditorAccess( $method ) {
 			// revert
 			$summary = wfMessage( 'revertpage', $revision->getUserText(), $wgUser->getName() )->text();
 
-			$article = new Article( $revision->getTitle() );
-			$status = $article->doEdit( $revision->getText(), $summary, 0, $rid );
+			$page = WikiPage::factory( $revision->getTitle() );
+			$status = $page->doEditContent(
+				ContentHandler::makeContent( $revision->getText(), $revision->getTitle() ),
+				$summary,
+				0,
+				$rid
+			);
 		}
 		return wfMessage( 'spm_ajax_success' )->text();
 	} elseif ( $method == "refreshPropertyRevision" ) {
@@ -220,8 +228,11 @@ function spm_wf_EditorAccess( $method ) {
 		$title = Title::newFromText( $name, NS_TEMPLATE );
 		// decode error, just deal this in client js
 //		$text = html_entity_decode( $text );
-		$article = new Article( $title );
-		$ret = $article->doEdit( $text, 'Edit by Widget Designer' );
+		$page = WikiPage::factory( $title );
+		$ret = $page->doEditContent(
+			ContentHandler::makeContent( $text, $title ),
+			'Edit by Widget Designer'
+		);
 		if ( !$ret->isOK() ) {
 			return $ret->getWikiText();
 		}
@@ -246,8 +257,11 @@ function spm_wf_EditorAccess( $method ) {
 			$revision = Revision::newFromTitle( $title );
 			if ( $revision != null ) $text .= $revision->getText();
 
-			$article = new Article( $title );
-			$ret = $article->doEdit( $text, 'Edit by Widget Designer' );
+			$page = WikiPage::factory( $title );
+			$ret = $page->doEditContent(
+				ContentHandler::makeContent( $text, $title ),
+				'Edit by Widget Designer'
+			);
 			if ( !$ret->isOK() ) {
 				return $ret->getWikiText();
 			}
@@ -359,8 +373,11 @@ if a page with that name already exists, you will be sent to a form to edit that
 
 				$title = Title::newFromText( $widget_name, SF_NS_FORM );
 
-				$article = new Article( $title );
-				$ret = $article->doEdit( $form_text, 'Edit by Widget Designer' );
+				$page = WikiPage::factory( $title );
+				$ret = $page->doEditContent(
+					ContentHandler::makeContent( $form_text, $title ),
+					'Edit by Widget Designer'
+				);
 				if ( $ret->isOK() ) {
 					$ret = 1;
 					$msg = $title->getFullURL();
