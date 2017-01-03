@@ -296,7 +296,7 @@ function spm_wf_EditorAccess( $method ) {
 //				$article = new Article( $tmpl_title );
 //				if ( !$article->exists() ) continue;
 //
-//				$text = $article->getContent();
+//				$text = ContentHandler::getContentText( $article->getPage()->getContent() );
 //				$len = strlen( $text );
 //				$offset = 0;
 //				$content2 = '';

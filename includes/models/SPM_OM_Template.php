@@ -47,7 +47,7 @@ class SPMTemplateModel extends SPMObjectModelCollection {
 			return null;
 		}
 
-		$text = $article->getContent();
+		$text = ContentHandler::getContentText( $article->getPage()->getContent() );
 		$len = strlen( $text );
 		$offset = 0;
 		$content2 = '';
