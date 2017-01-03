@@ -45,7 +45,7 @@ class SPMWidgetExtraWidget extends SPMWidgetExtra {
 
 			$title = Title::newFromText( $widget, NS_WIDGET );
 			$rev = Revision::newFromTitle( $title );
-			$text = $rev->getText();
+			$text = ContentHandler::getContentText( $rev->getContent() );
 			// FIXME: get easy fields
 			if ( !preg_match_all( '/\{\$([^|}]+)[|}]/', $text, $m ) ) return "[]";
 

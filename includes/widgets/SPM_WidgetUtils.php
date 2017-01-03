@@ -512,7 +512,7 @@ class SPMWidgetUtils {
 						}
 					}
 
-					$text = $revision->getText();
+					$text = ContentHandler::getContentText( $revision->getContent() );
 
 					$tmpl_name = $title->getDBkey();
 					$tmpl_data[$tmpl_name] = array();
@@ -660,7 +660,7 @@ class SPMWidgetUtils {
 		SPMWidgetParserFunctions::reset();
 		global $wgParser, $wgUser;
 		$options = ParserOptions::newFromUser( $wgUser );
-		$wgParser->parse( $r->getText(), $title, $options );
+		$wgParser->parse( ContentHandler::getContentText( $r->getContent() ), $title, $options );
 
 		$connectorExpressions = SPMWidgetParserFunctions::$connectorExpressions;
 
@@ -1004,7 +1004,7 @@ class SPMWidgetUtils {
 	 */
 	static function updateWidgetConnectors( Title $title, array $wfexps ) {
 		$revision = Revision::newFromTitle( $title );
-		if ( $revision != null ) $text = $revision->getText();
+		if ( $revision != null ) $text = ContentHandler::getContentText( $revision->getContent() );
 		// remove all wfexp parser functions
 		$wom = WOMProcessor::parseToWOM( $text );
 		foreach ( $wom->getObjectsByTypeID( WOM_TYPE_PARSERFUNCTION ) as $pf ) {

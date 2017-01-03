@@ -177,7 +177,7 @@ function spm_wf_EditorAccess( $method ) {
 
 			$page = WikiPage::factory( $revision->getTitle() );
 			$status = $page->doEditContent(
-				ContentHandler::makeContent( $revision->getText(), $revision->getTitle() ),
+				$revision->getContent(),
 				$summary,
 				0,
 				$rid
@@ -196,7 +196,7 @@ function spm_wf_EditorAccess( $method ) {
 
 			$revision = Revision::newFromTitle( $title );
 			if ( $revision == null ) continue;
-			$wiki .= $revision->getText();
+			$wiki .= ContentHandler::getContentText( $revision->getContent() );
 		}
 		$tmpls = SPMArticleUtils::parsePageTemplates( $wiki );
 		SPMWidgetViewUtils::initialize();
@@ -255,7 +255,7 @@ function spm_wf_EditorAccess( $method ) {
 			$text = "[[{$smwdatatype->getWikiValue()}::" . SPMWidgetUtils::getPrefixedText( $template ) . "| ]]\n";
 
 			$revision = Revision::newFromTitle( $title );
-			if ( $revision != null ) $text .= $revision->getText();
+			if ( $revision != null ) $text .= ContentHandler::getContentText( $revision->getContent() );
 
 			$page = WikiPage::factory( $title );
 			$ret = $page->doEditContent(

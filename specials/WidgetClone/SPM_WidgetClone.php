@@ -139,7 +139,7 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 		foreach ( $templates as $t ) {
 			$revision = Revision::newFromTitle( Title::newFromText( $t, NS_TEMPLATE ) );
 			if ( $revision == null )continue;
-			$wikitext = $revision->getText();
+			$wikitext = ContentHandler::getContentText( $revision->getContent() );
 
 			foreach ( SPMArticleUtils::parsePageTemplates( $wikitext ) as $tmpl ) {
 				if ( !is_array( $tmpl ) ) {
@@ -156,7 +156,7 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 
 							$prop_name = $tmpl['fields'][1];
 							$revision = Revision::newFromTitle( Title::newFromText( $prop_name, SMW_NS_PROPERTY ) );
-							$p_content = ( $revision == null ) ? '' : $revision->getText();
+							$p_content = ( $revision == null ) ? '' : ContentHandler::getContentText( $revision->getContent() );
 
 							$ps = explode( '/', $prop_name, 2 );
 							$new_prop_name = $targetWidget . '/' . $ps[1];
@@ -187,7 +187,7 @@ class SPMWidgetClone extends UnlistedSpecialPage {
 			// FIXME: replace widget name for now, shall use property mapping instead
 			foreach ( $act_widgets as $aw ) {
 				$revision = Revision::newFromTitle( Title::newFromText( $aw, NS_CATEGORY_WIDGET ) );
-				$w_content = ( $revision == null ) ? '' : $revision->getText();
+				$w_content = ( $revision == null ) ? '' : ContentHandler::getContentText( $revision->getContent() );
 				$w_content = preg_replace( '/\[\[\s*' . $smwdatatype->getWikiValue() . '\s*:[:=][^]]+\]\]/i', '', $w_content );
 				$w_content = str_replace( $act_widgets, $targetWidget, $w_content );
 

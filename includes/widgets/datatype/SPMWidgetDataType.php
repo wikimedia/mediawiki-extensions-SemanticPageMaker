@@ -187,7 +187,11 @@ abstract class SPMWidgetDataType {
 			$options = ParserOptions::newFromUser( $wgUser );
 //			global $wgParserConf;
 //			$parser = new Parser( $wgParserConf );
-			$output = $wgParser->parse( $rev->getText(), $proptitle, $options );
+			$output = $wgParser->parse(
+				ContentHandler::getContentText( $rev->getContent() ),
+				$proptitle,
+				$options
+			);
 			SMWParseData::storeData( $output, $proptitle, true );
 
 			$semdata = SMWParseData::getSMWdata( $wgParser );

@@ -222,7 +222,7 @@ class CategoryWidgetViewer {
 		$revision = Revision::newFromTitle( $title );
 		if ( $revision == null ) return '';
 
-		return $this->getWidgetWiki( $revision->getText(), $title, $update );
+		return $this->getWidgetWiki( ContentHandler::getContentText( $revision->getContent() ), $title, $update );
 	}
 	function loadParentWidgets( $widgets ) {
 		$wiki = '';
