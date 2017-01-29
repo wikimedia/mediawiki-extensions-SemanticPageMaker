@@ -84,13 +84,15 @@ function smwfSPMGetAjaxMethodPrefix() {
  */
 function wgSPMSetupExtension() {
 	global $wgSPMIP, $wgHooks, $wgExtensionCredits, $wgAvailableRights;
-	global $wgAutoloadClasses, $wgSpecialPages;
+	global $wgAutoloadClasses, $wgSpecialPages, $wgMessagesDirs;
 
 	smwfSPMInitMessages();
 	if ( !defined( 'WOM_VERSION' ) ) {
 		echo wfMessage( 'spm_error_nowom' )->escaped();
 		die;
 	}
+
+	$wgMessagesDirs['SemanticPageMaker'] = __DIR__ . '/../i18n';
 
 	$wgAutoloadClasses['SPMProcessor'] = $wgSPMIP . '/includes/SPM_Processor.php';
 
@@ -152,9 +154,9 @@ function wgSPMSetupExtension() {
 	// Register Credits
 	$wgExtensionCredits['parserhook'][] = array(
 	'name' => 'Semantic Page Maker Extension (formerly pulished as Wiki&#160;Editors&#160;Extension)', 'version' => SPM_VERSION,
-			'author' => "Ning Hu, Justin Zhang, [http://smwforum.ontoprise.com/smwforum/index.php/Jesse_Wang Jesse Wang], sponsored by [http://projecthalo.com Project Halo], [http://www.vulcan.com Vulcan Inc.]",
+			'author' => array( 'Ning Hu', 'Justin Zhang', '[http://smwforum.ontoprise.com/smwforum/index.php/Jesse_Wang Jesse Wang]', 'sponsored by [http://projecthalo.com Project Halo]', '[http://www.vulcan.com Vulcan Inc.]' ),
 			'url' => 'http://wiking.vulcan.com/dev',
-			'description' => 'Easy Wiki page editor for wiki user.' );
+			'descriptionmsg' => 'semanticpagemaker-desc' );
 
 	return true;
 }
