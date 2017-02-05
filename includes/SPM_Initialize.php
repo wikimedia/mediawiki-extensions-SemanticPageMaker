@@ -94,6 +94,8 @@ function wgSPMSetupExtension() {
 
 	$wgMessagesDirs['SemanticPageMaker'] = __DIR__ . '/../i18n';
 
+	$wgExtensionMessagesFiles['SemanticPageMakerAlias'] = __DIR__ . '/../SemanticPageMaker.alias.php';
+
 	$wgAutoloadClasses['SPMProcessor'] = $wgSPMIP . '/includes/SPM_Processor.php';
 
 	$wgAutoloadClasses['SPMInlineEditor'] = $wgSPMIP . '/includes/SPM_InlineEditor.php';
