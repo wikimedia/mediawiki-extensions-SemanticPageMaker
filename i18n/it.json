@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Margherita.mignanelli"
+			"Margherita.mignanelli",
+			"Beta16"
 		]
 	},
-	"semanticpagemaker-desc": "Semplice redattore di pagine di wiki per l'utente di wiki."
+	"semanticpagemaker-desc": "Semplice editor di pagine wiki per l'utente wiki."
 }
