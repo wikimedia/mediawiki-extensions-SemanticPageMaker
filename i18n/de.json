@@ -1,8 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Metalhead64"
+			"Metalhead64",
+			"Kghbln"
 		]
 	},
-	"semanticpagemaker-desc": "Einfacher Wikiseiteneditor für Wikibenutzer"
+	"semanticpagemaker-desc": "Ermöglicht das einfache Erstellen von Seiten"
 }
