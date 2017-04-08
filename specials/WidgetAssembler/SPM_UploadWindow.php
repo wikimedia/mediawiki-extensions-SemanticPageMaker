@@ -358,7 +358,7 @@ class UploadWindowForm {
 		 * out of it. We'll strip some silently that Title would die on.
 		 */
 		$filtered = wfStripIllegalFilenameChars ( $filtered );
-		$nt = Title::makeTitleSafe( NS_IMAGE, $filtered );
+		$nt = Title::makeTitleSafe( NS_FILE, $filtered );
 		if ( is_null( $nt ) ) {
 			$this->uploadError( wfMessage( 'illegalfilename', $filtered )->escaped() );
 			return;
@@ -679,7 +679,7 @@ END;
 	public static function ajaxGetLicensePreview( $license ) {
 		global $wgParser, $wgUser;
 		$text = '{{' . $license . '}}';
-		$title = Title::makeTitle( NS_IMAGE, 'Sample.jpg' );
+		$title = Title::makeTitle( NS_FILE, 'Sample.jpg' );
 		$options = ParserOptions::newFromUser( $wgUser );
 
 		// Expand subst: first, then live templates...
@@ -872,7 +872,7 @@ wgAjaxLicensePreview = {$alp};
 		}
 
 		if ( $this->mDesiredDestName && $wgUser->isAllowed( 'deletedhistory' ) ) {
-			$title = Title::makeTitleSafe( NS_IMAGE, $this->mDesiredDestName );
+			$title = Title::makeTitleSafe( NS_FILE, $this->mDesiredDestName );
 			if ( $title instanceof Title && ( $count = $title->isDeleted() ) > 0 ) {
 				$link = wfMessage(
 					$wgUser->isAllowed( 'delete' ) ? 'thisisdeleted' : 'viewdeleted'

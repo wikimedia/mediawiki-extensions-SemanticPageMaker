@@ -11,7 +11,7 @@ class SMSPMxtendedDatatypeWikiPageValue extends SMWWikiPageValue {
 				$this->m_fixNamespace = NS_MEDIA;
 				break;
 			case '___img':
-				$this->m_fixNamespace = NS_IMAGE; // NS_FILE
+				$this->m_fixNamespace = NS_FILE;
 				break;
 			case '___wdg':
 				$this->m_fixNamespace = NS_CATEGORY_WIDGET;

@@ -8,6 +8,13 @@ if ( !defined( 'MEDIAWIKI' ) ) die;
 
 define( 'SPM_VERSION', '0.1' );
 
+/**
+ * For older versions of mediawiki, which don't support NS_FILE (< 1.14).
+ */
+if ( !defined( 'NS_FILE' ) ) {
+	define( 'NS_FILE', NS_IMAGE );
+}
+
 $wgSPMIP = $IP . '/extensions/SemanticPageMaker';
 $wgSPMScriptPath = $wgScriptPath . '/extensions/SemanticPageMaker';
 

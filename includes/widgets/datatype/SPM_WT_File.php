@@ -11,7 +11,7 @@ class SMWFileDatatypeWikiPageValue extends SMWWikiPageValue {
 		parent::__construct( $typeid );
 		switch ( $typeid ) {
 			case '___img':
-				$this->m_fixNamespace = NS_IMAGE; // NS_FILE
+				$this->m_fixNamespace = NS_FILE;
 				break;
 		}
 	}
