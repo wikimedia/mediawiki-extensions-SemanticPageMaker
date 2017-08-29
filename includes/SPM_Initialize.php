@@ -93,7 +93,8 @@ function wgSPMSetupExtension() {
 	global $wgSPMIP, $wgHooks, $wgExtensionCredits, $wgAvailableRights;
 	global $wgAutoloadClasses, $wgSpecialPages, $wgMessagesDirs;
 
-	smwfSPMInitMessages();
+	// TODO: Message load is broken
+	// smwfSPMInitMessages();
 	if ( !defined( 'WOM_VERSION' ) ) {
 		echo wfMessage( 'spm_error_nowom' )->escaped();
 		die;
