@@ -120,6 +120,8 @@ function wgSPMWidgetSetupExtension() {
 		if ( !defined( 'SF_VERSION' ) ) {
 			if ( class_exists( 'HTMLTextField' ) ) { // added in MW 1.16
 				$wgAutoloadClasses['SPMUploadWindow2'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow2.php';
+				$wgAutoloadClasses['SFUploadForm'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow2.php';
+				$wgAutoloadClasses['SFUploadSourceField'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow2.php';
 				$wgSpecialPages['UploadWindow'] = array( 'SPMUploadWindow2' );
 			} else {
 				$wgAutoloadClasses['SPMUploadWindow'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow.php';

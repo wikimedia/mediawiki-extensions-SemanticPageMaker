@@ -107,12 +107,6 @@ function wgSPMSetupExtension() {
 	$wgAutoloadClasses['SPMProcessor'] = $wgSPMIP . '/includes/SPM_Processor.php';
 
 	$wgAutoloadClasses['SPMInlineEditor'] = $wgSPMIP . '/includes/SPM_InlineEditor.php';
-	$wgAutoloadClasses['SMWPageDatatypeWikiPageValue'] = $wgSPMIP . '/includes/SPM_WT_Page.php';
-	$wgAutoloadClasses['SMWFileDatatypeWikiPageValue'] = $wgSPMIP . '/includes/SPM_WT_File.php';
-	$wgAutoloadClasses['SMWMediaDatatypeWikiPageValue'] = $wgSPMIP . '/includes/SPM_WT_Media.php';
-	$wgAutoloadClasses['SMWWidgetDatatypeWikiPageValue'] = $wgSPMIP . '/includes/SPM_WT_Widget.php';
-	$wgAutoloadClasses['SFUploadForm'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow2.php';
-	$wgAutoloadClasses['SFUploadSourceField'] = $wgSPMIP . '/specials/WidgetAssembler/SPM_UploadWindow2.php';
 	$wgHooks['UnknownAction'][] = 'SPMInlineEditor::applyWIEditAction';
 	// Allow WIEdit by default for all
 	$wgGroupPermissions['*']['wiedit'] = true;

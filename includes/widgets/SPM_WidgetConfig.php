@@ -44,6 +44,11 @@ $wgAutoloadClasses['SPMWidgetNumberType']     =  $wgSPMIP . '/includes/widgets/d
 $wgAutoloadClasses['SPMWidgetUidType']        =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_UID.php';
 $wgAutoloadClasses['SPMWidgetWidgetType']     =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_Widget.php';
 
+$wgAutoloadClasses['SMWPageDatatypeWikiPageValue']       =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_Page.php';
+$wgAutoloadClasses['SMWFileDatatypeWikiPageValue']       =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_File.php';
+$wgAutoloadClasses['SMWMediaDatatypeWikiPageValue']      =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_Media.php';
+$wgAutoloadClasses['SMWWidgetDatatypeWikiPageValue']     =  $wgSPMIP . '/includes/widgets/datatype/SPM_WT_Widget.php';
+
 $wgSPMWidgetDataTypes = array(
 	'SPMWidgetPageType',
 	'SPMWidgetFileType',
