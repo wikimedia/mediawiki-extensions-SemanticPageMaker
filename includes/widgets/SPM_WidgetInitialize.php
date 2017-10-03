@@ -77,14 +77,7 @@ function wgSPMWidgetSetupExtension() {
     $wgHooks['smwInitDatatypes'][] = 'SPMWidgetUtils::smwInitDatatypes';
     $wgHooks['smwInitDatatypes'][] = 'SPMWidgetDataTypeUtils::smwInitDatatypes';
     global $wgParser;
-    if ( defined( 'MW_SUPPORTS_PARSERFIRSTCALLINIT' ) ) {
-    	$wgHooks['ParserFirstCallInit'][] = 'SPMWidgetParserFunctions::registerFunctions';
-    } else {
-    	if ( class_exists( 'StubObject' ) && !StubObject::isRealObject( $wgParser ) ) {
-    		$wgParser->_unstub();
-    	}
-    	SPMWidgetParserFunctions::registerFunctions( $wgParser );
-    }
+	$wgHooks['ParserFirstCallInit'][] = 'SPMWidgetParserFunctions::registerFunctions';
 
     // WOM api output
     $wgAutoloadClasses['SPMWidgetApiUtils'] = $wgSPMIP . '/includes/widgets/SPM_WidgetApiUtils.php';
