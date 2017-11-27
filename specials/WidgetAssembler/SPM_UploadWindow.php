@@ -850,7 +850,7 @@ END;
 		global $wgOut, $wgUser, $wgContLang;
 		global $wgUseCopyrightUpload, $wgUseAjax, $wgAjaxUploadDestCheck, $wgAjaxLicensePreview;
 		global $wgAllowCopyUploads;
-		global $wgStylePath, $wgStyleVersion;
+		global $wgStylePath;
 
 		$useAjaxDestCheck = $wgUseAjax && $wgAjaxUploadDestCheck;
 		$useAjaxLicensePreview = $wgUseAjax && $wgAjaxLicensePreview;
@@ -862,7 +862,7 @@ END;
 wgAjaxUploadDestCheck = {$adc};
 wgAjaxLicensePreview = {$alp};
 </script>
-<script type=\"text/javascript\" src=\"{$wgStylePath}/common/upload.js?{$wgStyleVersion}\"></script>
+<script type=\"text/javascript\" src=\"{$wgStylePath}/common/upload.js\"></script>
 		" );
 
 		if ( !wfRunHooks( 'UploadForm:initial', array( &$this ) ) )
