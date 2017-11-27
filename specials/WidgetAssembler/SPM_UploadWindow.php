@@ -1132,7 +1132,7 @@ EOT
 	 */
 	function verify( $tmpfile, $extension ) {
 		# magically determine mime type
-		$magic =& MimeMagic::singleton();
+		$magic = \MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer();
 		$mime = $magic->guessMimeType( $tmpfile, false );
 
 		# check mime type, if desired
@@ -1178,7 +1178,7 @@ EOT
 	 * @return bool
 	 */
 	function verifyExtension( $mime, $extension ) {
-		$magic =& MimeMagic::singleton();
+		$magic = \MediaWiki\MediaWikiServices::getInstance()->getMimeAnalyzer();
 
 		if ( ! $mime || $mime == 'unknown' || $mime == 'unknown/unknown' )
 			if ( ! $magic->isRecognizableExtension( $extension ) ) {
