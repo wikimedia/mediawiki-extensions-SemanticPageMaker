@@ -147,9 +147,8 @@ class SPMUploadWindow2 extends UnlistedSpecialPage {
 
 		# Check whether we actually want to allow changing stuff
 		if ( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
+			throw new ReadOnlyError;
 			SPMUtils::showCleanWikiOutput();
-			return;
 		}
 
 		# Unsave the temporary file in case this was a cancelled upload

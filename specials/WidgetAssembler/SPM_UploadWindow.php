@@ -273,8 +273,7 @@ class UploadWindowForm {
 		}
 
 		if ( wfReadOnly() ) {
-			$wgOut->readOnlyPage();
-			return;
+			throw new ReadOnlyError;
 		}
 
 		if ( $this->mReUpload ) {
